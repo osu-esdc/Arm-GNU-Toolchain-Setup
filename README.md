@@ -176,8 +176,9 @@ sudo ls
 ```
 -> it should execute the command without asking for a password!
 
-#### Install dependencies - FIX
+#### Install dependencies
 ```
+sudo 
 sudo apt install libncurses5
 ```
 
@@ -251,6 +252,9 @@ echo $PATH
 /opt/openOCD/xpack-openocd-0.12.0-4/bin/:/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/
 ```
 somewhere in the PATH variable. 
+
+#### Flashing the code!  
+unplug the device from the USB port, replug it in, then re-attach it to WSL using the windows command prompt commands (again). 
 
 
 
