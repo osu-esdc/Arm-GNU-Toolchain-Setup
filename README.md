@@ -7,7 +7,7 @@ Base-level links you will need:
 [ST-Link for Windows 7, 8, or 10](https://www.st.com/en/development-tools/stsw-link009.html#get-software) -> Download if you have Windows
 
 
-##For Linux (ubuntu 22.04 LTS):  
+## For Linux (ubuntu 22.04 LTS):  
 
 Install gcc  
 ```
