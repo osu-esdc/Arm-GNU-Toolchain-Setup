@@ -9,12 +9,16 @@ Base-level links you will need:
 
 For Linux (ubuntu 22.04 LTS):
 
-Install gcc
-`sudo apt-get install gcc make binutils`
+Install gcc  
+```
+sudo apt-get install gcc make binutils
+```
 
-Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder
-`cd ~/Downloads`
-`tar -xjf <name of downloaded .tar.xz folder>`
-`cd ~`
-`cd opt`
-`mkdir gcc-arm`
+Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder  
+```
+cd ~/Downloads
+```
+tar -xjf <name of downloaded .tar.xz folder>
+cd ~
+cd opt
+mkdir gcc-arm
