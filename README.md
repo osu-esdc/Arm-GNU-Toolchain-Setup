@@ -18,7 +18,7 @@ sudo apt-get install gcc make binutils
 sudo apt install vim
 ```
 
-#### Install dependencies   
+#### Install dependencies - FIX
 ```
 sudo apt install libncurses5
 ```
