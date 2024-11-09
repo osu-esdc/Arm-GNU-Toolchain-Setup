@@ -33,7 +33,7 @@ sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
 export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see `arm-gnu/<arm-gnu unpacked folder name>bin/` somewhere in the echoed output.  
+-> should see `arm-gnu/<arm-gnu unpacked folder name>/bin/` somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
