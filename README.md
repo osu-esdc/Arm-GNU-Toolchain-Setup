@@ -147,8 +147,8 @@ sudo vim ~/.bashrc
 ```
 Add the following lines to the end:  
 ```
-export EDITOR='program'
-export VISUAL='program'
+export EDITOR='vim'
+export VISUAL='vim'
 ```
 Then run:
 ```
