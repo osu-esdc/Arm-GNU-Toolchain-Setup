@@ -68,19 +68,19 @@ Add the following line and then exit using `:wq`:
 ```
 ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="660", GROUP="plugdev", TAG+="uaccess"
 ```
+Implement the rule changes:
 ```
 sudo udevadm control --reload-rules
 ```
 
-#### Add this stuff to PATH (permanently), IMPORTANT:  
+#### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
 ```
 sudo vi /etc/environment
 ```
 Insert the following at the end of the PATH variable:    
-`/opt/arm-gnu/<arm-gnu folder name>/bin:/opt/openOCD/<xpack folder name>/bin:/opt/stlink/src`
-
+`/opt/arm-gnu/<arm-gnu folder name>/bin:/opt/openOCD/<xpack folder name>/bin:/opt/stlink/src`  
 ... So that your PATH variable looks something like this:  
-`PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"`
+`PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"`  
 
 
 
