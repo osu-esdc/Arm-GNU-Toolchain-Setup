@@ -89,7 +89,16 @@ echo $PATH
 ```
 -> should see your changed PATH, with the required stuff in it!
 
-## For WSL 2:
+
+
+
+
+
+
+
+
+
+## For WSL 2 (only works with Ubuntu 22.04):
 
 ### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
@@ -98,15 +107,7 @@ wsl.exe --install Ubuntu-22.04
 ```
 After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
 
-#### Getting USB support in WSL:  
-Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)    
-Download the .msi file from [here](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
-Run the .msi file installer  
-
-Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
-Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
-
-### Setup OS stuff in WSL:
+### Setup git stuff in WSL:
 Set git username and password:
 ```
 git config --global user.name “username”
@@ -114,6 +115,10 @@ git config --global user.email “email”
 git config --list
 ```
 -> output of last command should show you your inputted username and email!
+
+Set git ssh stuff up:
+```
+
 
 
 
@@ -179,7 +184,6 @@ sudo ls
 
 #### Install dependencies
 ```
-sudo 
 sudo apt install libncurses5
 ```
 
@@ -253,6 +257,14 @@ echo $PATH
 /opt/openOCD/xpack-openocd-0.12.0-4/bin/:/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/
 ```
 somewhere in the PATH variable. 
+
+#### Getting USB support in WSL:  
+Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)    
+Download the .msi file from [here](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
+Run the .msi file installer  
+
+Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
+Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 
 #### Flashing the code!  
 unplug the device from the USB port, replug it in, then re-attach it to WSL using the windows command prompt commands (again). 
