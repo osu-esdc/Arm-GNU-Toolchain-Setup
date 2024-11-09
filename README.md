@@ -7,14 +7,14 @@ Base-level links you will need:
 [ST-Link for Windows 7, 8, or 10](https://www.st.com/en/development-tools/stsw-link009.html#get-software) -> Download if you have Windows
 
 
-### For Linux (ubuntu 22.04 LTS):  
+## For Linux (ubuntu 22.04 LTS):  
 
-Install gcc  
+#### Install gcc  
 ```
 sudo apt-get install gcc make binutils
 ```
 
-Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder; if ~/Downloads is not where this folder is placed then replace Downloads with that folder  
+#### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder; if ~/Downloads is not where this folder is placed then replace Downloads with that folder  
 ```
 cd ~/Downloads
 tar -xjf <name of downloaded .tar.xz folder>
@@ -32,11 +32,13 @@ echo $PATH
 ```
 -> should see the path name of your gcc-arm/bin folder in the echoed output.  
 
-Test if GNU Arm Toolchain works:  
+#### Test if GNU Arm Toolchain works:  
 ```
 arm-none-eabi-gcc
 ```
 -> if it outputs a fatal error and says "no input files", then you have a successful install!  
+
+
 
 
 
