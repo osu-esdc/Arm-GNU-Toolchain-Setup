@@ -12,9 +12,10 @@
   
 ## For Linux (tested for ubuntu 22.04 LTS):  
 
-#### Install gcc  
+#### Install gcc and vim
 ```
 sudo apt-get install gcc make binutils
+sudo apt install vim
 ```
 
 #### Install dependencies   
@@ -90,7 +91,7 @@ echo $PATH
 
 ## For WSL 2:
 
-### Setup WSL:
+### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
 ```
 wsl --install
@@ -104,6 +105,15 @@ Run the .msi file installer
 
 Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
 Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
+
+### Setup OS stuff in WSL:
+Set git username and password:
+```
+git config --global user.name “username”
+git config --global user.email “email”
+git config --list
+```
+-> output of last command should show you your inputted username and email!
 
 
 
