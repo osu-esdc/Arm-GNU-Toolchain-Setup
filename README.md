@@ -138,6 +138,7 @@ Download OpenOCD: get a linux .tar.gz file that matches your system's architecht
 #### Install gcc and vim  
 ```
 sudo apt-get install gcc make binutils
+sudo apt-get install update
 sudo apt install vim
 ```
 
