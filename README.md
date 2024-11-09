@@ -29,11 +29,11 @@ tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
 cd /opt
 mkdir arm-gnu
 cd ~/Downloads
-sudo mv <arm-gnu .tar.xz folder> /opt/arm-gnu
-export PATH="/opt/arm-gnu/<arm-gnu .tar.xz folder>/bin/:$PATH"
+sudo mv <arm-gnu folder name> /opt/arm-gnu
+export PATH="/opt/arm-gnu/<arm-gnu folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see arm-gnu/bin/ somewhere in the echoed output.  
+-> should see arm-gnu/<arm-gnu folder name>bin/ somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
@@ -48,11 +48,11 @@ tar -xzf <name of linux .tar.gz file; should start with xpack>
 cd /opt
 mkdir openOCD
 cd ~/Downloads
-sudo mv <xpack .tar.gz folder> /opt/openOCD
-export PATH="/opt/openOCD/<xpack .tar.gz folder>/bin/:$PATH"
+sudo mv <xpack folder name> /opt/openOCD
+export PATH="/opt/openOCD/<xpack folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see openOCD/<xpack .tar.gz folder>/bin/ somewhere in the echoed output.  
+-> should see openOCD/<xpack folder name>/bin/ somewhere in the echoed output.  
 
 #### Install STlink
 ```
@@ -72,7 +72,15 @@ ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="660", GROUP="plugdev", 
 sudo udevadm control --reload-rules
 ```
 
+#### Add this stuff to PATH (permanently), IMPORTANT:
+```
+sudo vi /etc/environment
+```
+Insert the following at the end of the PATH variable:  
+`/opt/arm-gnu/<arm-gnu folder name>/bin:/opt/openOCD/<xpack folder name>/bin:/opt/stlink/src`
 
+... So that your PATH variable looks something like this:
+PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu folder name>/bin:/opt/openOCD/<xpack folder name>/bin:/opt/stlink/src"
 
 
 
