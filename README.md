@@ -153,6 +153,7 @@ export VISUAL='vim'
 Then run:
 ```
 sudo update-alternatives --config editor
+source ~/.bashrc
 ```
 Then enter the number that corresponds to vim.basic and hit enter
 
@@ -175,22 +176,22 @@ sudo ls
 ```
 -> it should execute the command without asking for a password!
 
-
 #### Install dependencies - FIX
 ```
 sudo apt install libncurses5
 ```
 
-#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
+#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder); note: may need to change the name of the arm-gnu file based on differing architechtures/OS 
 ```
 sudo mkdir /opt/arm-gnu
 sudo mv /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz /opt/arm-gnu
-sudo tar -xf /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
-sudo rm /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+cd /opt/arm-gnu
+sudo tar -xf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+sudo rm arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
 export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
 echo $PATH
 ```
--> should see `arm-gnu/<arm-gnu unpacked folder name>/bin/` somewhere in the echoed output.  
+-> should see `arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/` somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
@@ -198,26 +199,16 @@ arm-none-eabi-gcc
 ```
 -> if it outputs a fatal error and says "no input files", then you have a successful install!  
 
-#### Install OpenOCD (first download the needed linux .tar.gz file)   
+#### Install OpenOCD (first download the needed linux .tar.gz file)
+notes: 
+- may need to change the name of the xpack file based on differing architechtures/OS  
 ```
 sudo mkdir /opt/openOCD
 sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-4-linux-x64.tar.gz /opt/openOCD
-
-sudo tar -xf /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
-sudo rm /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
-export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
-echo $PATH
-
-cd ~/Downloads
-tar -xzf <name of linux .tar.gz file; should start with xpack>
-cd /opt
-mkdir openOCD
-cd ~/Downloads
-sudo mv <xpack unpacked folder name> /opt/openOCD
-export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
-echo $PATH
+cd /opt/openOCD
+sudo tar -xzf xpack-openocd-0.12.0-4-linux-x64.tar.gz
+sudo rm xpack-openocd-0.12.0-4-linux-x64.tar.gz
 ```
--> should see `/opt/openOCD/<xpack unpacked folder name>/bin/` somewhere in the echoed output.  
 
 #### Install STlink
 ```
@@ -227,7 +218,7 @@ sudo apt install stlink-tools
 #### Adding some stuff to allow ST-link to be registered as a valid device
 ###### For ST-Link V2-1 connections (for other connections, see [this link](https://github.com/arduino/OpenOCD/blob/master/contrib/60-openocd.rules) to find the correct config data to put into 70-local.rules):  
 ```
-sudo vi /etc/udev/rules.d/70-local.rules
+sudo vim /etc/udev/rules.d/70-local.rules
 ```
 Add the following line and then exit using `:wq`:
 ```
@@ -240,20 +231,26 @@ sudo udevadm control --reload-rules
 
 #### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
 ```
-sudo vi /etc/environment
+sudo vim ~/.bashrc
 ```
-Insert the following at the end of the PATH variable:    
-`/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src`  
-
-... So that your PATH variable looks something like this:  
-`PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"`  
-
+At the end of the file, add the following lines: 
+```
+export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
+export PATH="/opt/openOCD/xpack-openocd-0.12.0-4/bin/:$PATH"
+```
+Run the following to reset path var:
+```
+source ~/.bashrc
+```
+Verify that PATH has been updated: 
 ```
 echo $PATH
 ```
--> should see your changed PATH, with the required stuff in it!
-
-
+-> should see the following:
+```
+/opt/openOCD/xpack-openocd-0.12.0-4/bin/:/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/
+```
+somewhere in the PATH variable. 
 
 
 
