@@ -6,7 +6,10 @@ Base-level links you will need:
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download the relevant darwin .tar.gz file (for Windows) OR the linux .tar.gz file (for Linux)  
 [ST-Link for Windows 7, 8, or 10](https://www.st.com/en/development-tools/stsw-link009.html#get-software) -> Download if you have Windows
 
-
+Some syntax notes:  
+- <xxx>: these angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
+- These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
+  
 ## For Linux (ubuntu 22.04 LTS):  
 
 #### Install gcc  
@@ -14,12 +17,12 @@ Base-level links you will need:
 sudo apt-get install gcc make binutils
 ```
 
-#### Install dependencies
+#### Install dependencies   
 ```
 sudo apt install lubncurses5
 ```
 
-#### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder; if ~/Downloads is not where this folder is placed then replace Downloads with that parent folder  
+#### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder  
 ```
 cd ~/Downloads
 tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
@@ -38,7 +41,7 @@ arm-none-eabi-gcc
 ```
 -> if it outputs a fatal error and says "no input files", then you have a successful install!  
 
-#### Install OpenOCD -> first download the needed linux .tar.gz file; if ~/Downloads is not where this folder is placed then replace Downloads with that parent folder
+#### Install OpenOCD -> first download the needed linux .tar.gz file  
 ```
 cd ~/Downloads
 tar -xzf <name of linux .tar.gz file; should start with xpack>
@@ -50,6 +53,28 @@ export PATH="/opt/openOCD/<xpack .tar.gz folder>/bin/:$PATH"
 echo $PATH
 ```
 -> should see openOCD/<xpack .tar.gz folder>/bin/ somewhere in the echoed output.  
+
+#### Install STlink
+```
+sudo apt install stlink-tools
+```
+
+#### Adding some stuff to allow ST-link to be registered as a valid device
+###### For ST-Link V2-1 connections (for other connections, see [this link](https://github.com/arduino/OpenOCD/blob/master/contrib/60-openocd.rules) to find the correct config data to put into 70-local.rules):  
+```
+sudo vi /etc/udev/rules.d/70-local.rules
+```
+Add the following line and then exit using `:wq`:
+```
+ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="660", GROUP="plugdev", TAG+="uaccess"
+```
+```
+sudo udevadm control --reload-rules
+```
+
+
+
+
 
 
 
