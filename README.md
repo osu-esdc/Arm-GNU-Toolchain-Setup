@@ -10,7 +10,7 @@
 - angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
 - These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
   
-## For Linux (ubuntu 22.04 LTS):  
+## For Linux (tested for ubuntu 22.04 LTS):  
 
 #### Install gcc  
 ```
