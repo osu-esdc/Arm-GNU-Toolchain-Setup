@@ -120,7 +120,7 @@ git config --list
 
 
 ## Required Downloads:  
-[GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download your system's .tar.xz file  
+[GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download your system's .tar.xz file (Get 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download your system's linux .tar.gz file   
 
 ### Some syntax notes:  
