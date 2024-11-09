@@ -1,12 +1,12 @@
 # STM32-Setup_Guide
-This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi/Vim, OpenOCD, STLink, and the Arm GNU Toolchain.  
+#### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi/Vim, OpenOCD, STLink, and the Arm GNU Toolchain.  
 
-Base-level links you will need:  
+## Base-level links you will need:  
 [GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download the relevant .zip folder (for Windows) OR .tar.xz folder (for Linux)  
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download the relevant darwin .tar.gz file (for Windows) OR the linux .tar.gz file (for Linux)  
 [ST-Link for Windows 7, 8, or 10](https://www.st.com/en/development-tools/stsw-link009.html#get-software) -> Download if you have Windows
 
-Some syntax notes:  
+### Some syntax notes:  
 - angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
 - These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
   
