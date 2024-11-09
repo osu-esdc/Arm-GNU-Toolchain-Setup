@@ -22,7 +22,7 @@ sudo apt-get install gcc make binutils
 sudo apt install libncurses5
 ```
 
-#### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder  
+#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
 ```
 cd ~/Downloads
 tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
@@ -41,7 +41,7 @@ arm-none-eabi-gcc
 ```
 -> if it outputs a fatal error and says "no input files", then you have a successful install!  
 
-#### Install OpenOCD -> first download the needed linux .tar.gz file  
+#### Install OpenOCD (first download the needed linux .tar.gz file)   
 ```
 cd ~/Downloads
 tar -xzf <name of linux .tar.gz file; should start with xpack>
