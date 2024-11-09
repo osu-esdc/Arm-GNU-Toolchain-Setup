@@ -119,9 +119,9 @@ git config --list
 
 
 
-## Required Downloads:
-[GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download your system's .tar.xz file
-[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download your system's linux .tar.gz file 
+## Required Downloads:  
+[GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download your system's .tar.xz file  
+[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download your system's linux .tar.gz file   
 
 ### Some syntax notes:  
 - angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
