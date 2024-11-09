@@ -117,7 +117,7 @@ git config --list
 -> output of last command should show you your inputted username and email!
 
 Set git ssh stuff up:
-```
+
 
 
 
