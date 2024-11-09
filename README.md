@@ -120,20 +120,61 @@ git config --list
 
 
 ## Required Downloads:  
-[GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download your system's .tar.xz file (Get 
-[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download your system's linux .tar.gz file   
+Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu (default).  
+Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file  
+[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
+
+Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
+[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
 
 ### Some syntax notes:  
-- angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
-- These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
+- Angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
+- These instructions assume that downloaded files from the web go to the /c/users/username/Downloads folder path in your Windows OS. If they don't, then replace the path
+  with the one that contains the previous downloads.
+- You only need to use 'username' and not just username when you have spaces in the username. This username refers to the Windows OS username. 
   
 ## For WSL:  
 
-#### Install gcc and vim
+#### Install gcc and vim  
 ```
 sudo apt-get install gcc make binutils
 sudo apt install vim
 ```
+
+#### Change the default text editor to vim  
+```
+sudo vim ~/.bashrc
+```
+Add the following lines to the end:  
+```
+export EDITOR='program'
+export VISUAL='program'
+```
+Then run:
+```
+sudo update-alternatives --config editor
+```
+Then enter the number that corresponds to vim.basic and hit enter
+
+#### Make it so that sudo doesn't require password
+```
+sudo visudo
+```
+This will open the sudoers file in the default text editor. Look for the line that contains the following:
+```
+root   ALL=(ALL:ALL) ALL
+```
+Below that line, add the following:
+```
+<wsl username>  ALL=(ALL) NOPASSWD:ALL
+```
+Save the changes and exit the text editor.
+Verify that the sudo configuration is correct by running a command with sudo:
+```
+sudo ls
+```
+-> it should execute the command without asking for a password!
+
 
 #### Install dependencies - FIX
 ```
@@ -142,13 +183,11 @@ sudo apt install libncurses5
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
 ```
-cd ~/Downloads
-tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
-cd /opt
-mkdir arm-gnu
-cd ~/Downloads
-sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
-export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
+sudo mkdir /opt/arm-gnu
+sudo mv /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz /opt/arm-gnu
+sudo tar -xf /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+sudo rm /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
 echo $PATH
 ```
 -> should see `arm-gnu/<arm-gnu unpacked folder name>/bin/` somewhere in the echoed output.  
@@ -161,6 +200,14 @@ arm-none-eabi-gcc
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)   
 ```
+sudo mkdir /opt/openOCD
+sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-4-linux-x64.tar.gz /opt/openOCD
+
+sudo tar -xf /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+sudo rm /opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
+echo $PATH
+
 cd ~/Downloads
 tar -xzf <name of linux .tar.gz file; should start with xpack>
 cd /opt
