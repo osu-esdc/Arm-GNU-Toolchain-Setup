@@ -88,6 +88,21 @@ echo $PATH
 ```
 -> should see your changed PATH, with the required stuff in it!
 
+## For WSL 2:
+
+### Setup WSL:
+In Windows Powershell:
+```
+wsl --install
+```
+After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
+
+#### Getting USB support in WSL:  
+Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)    
+Download the .msi file from [here](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
+Run the .msi file installer  
+
+Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)
 
 
 
