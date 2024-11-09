@@ -2,101 +2,12 @@
 #### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi/Vim, OpenOCD, STLink, and the Arm GNU Toolchain.  
 
 ## Required Downloads:
-[GNU Arm Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  -> Download the relevant .zip folder (for Windows) OR .tar.xz folder (for Linux)  
-[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) -> Download the relevant darwin .tar.gz file (for Windows) OR the linux .tar.gz file (for Linux)  
-[ST-Link for Windows 7, 8, or 10](https://www.st.com/en/development-tools/stsw-link009.html#get-software) -> Download if you have Windows
+Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu (default).  
+Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file  
+[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
 
-### Some syntax notes:  
-- angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
-- These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
-  
-## For Linux (tested for ubuntu 22.04 LTS):  
-
-#### Install gcc and vim
-```
-sudo apt-get install gcc make binutils
-sudo apt install vim
-```
-
-#### Install dependencies for gdb
-```
-sudo apt install libncurses5
-sudo apt-get install libncursesw5
-```
-
-#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
-```
-cd ~/Downloads
-tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
-cd /opt
-mkdir arm-gnu
-cd ~/Downloads
-sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
-export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
-echo $PATH
-```
--> should see `arm-gnu/<arm-gnu unpacked folder name>/bin/` somewhere in the echoed output.  
-
-#### Test if GNU Arm Toolchain works:  
-```
-arm-none-eabi-gcc
-```
--> if it outputs a fatal error and says "no input files", then you have a successful install!  
-
-#### Install OpenOCD (first download the needed linux .tar.gz file)   
-```
-cd ~/Downloads
-tar -xzf <name of linux .tar.gz file; should start with xpack>
-cd /opt
-mkdir openOCD
-cd ~/Downloads
-sudo mv <xpack unpacked folder name> /opt/openOCD
-export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
-echo $PATH
-```
--> should see `/opt/openOCD/<xpack unpacked folder name>/bin/` somewhere in the echoed output.  
-
-#### Install STlink
-```
-sudo apt install stlink-tools
-```
-
-#### Adding some stuff to allow ST-link to be registered as a valid device
-###### For ST-Link V2-1 connections (for other connections, see [this link](https://github.com/arduino/OpenOCD/blob/master/contrib/60-openocd.rules) to find the correct config data to put into 70-local.rules):  
-```
-sudo vi /etc/udev/rules.d/70-local.rules
-```
-Add the following line and then exit using `:wq`:
-```
-ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="660", GROUP="plugdev", TAG+="uaccess"
-```
-Implement the rule changes:
-```
-sudo udevadm control --reload-rules
-```
-
-#### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
-```
-sudo vi /etc/environment
-```
-Insert the following at the end of the PATH variable:    
-`/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src`  
-
-... So that your PATH variable looks something like this:  
-`PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"`  
-
-```
-echo $PATH
-```
--> should see your changed PATH, with the required stuff in it!
-
-
-
-
-
-
-
-
+Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
+[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
 
 
 ## For WSL 2 (only works with Ubuntu 22.04):
@@ -147,20 +58,6 @@ ssh -T git@github.com
 ```
 -> should see `Hi git_username! You've successfully authenticated, but GitHub does not provide shell access.`!
 
-
-
-
-
-
-
-## Required Downloads:  
-Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu (default).  
-Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file  
-[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
-
-Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
-[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
-
 ### Some syntax notes:  
 - Angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
 - These instructions assume that downloaded files from the web go to the /c/users/username/Downloads folder path in your Windows OS. If they don't, then replace the path
@@ -193,7 +90,6 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 ```
 source ~/.bashrc
 ```
-
 #### Make it so that sudo doesn't require password
 ```
 sudo visudo
@@ -219,7 +115,9 @@ sudo apt install libncurses5
 sudo apt-get install libncursesw5
 ```
 
-#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder); note: may need to change the name of the arm-gnu file based on differing architechtures/OS 
+#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
+notes:   
+- may need to change the name of the arm-gnu file based on differing architechtures/OS    
 ```
 sudo mkdir /opt/arm-gnu
 sudo mv /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz /opt/arm-gnu
@@ -253,8 +151,7 @@ sudo rm xpack-openocd-0.12.0-4-linux-x64.tar.gz
 sudo apt install stlink-tools
 ```
 
-#### Adding some stuff to allow ST-link to be registered as a valid device
-###### For ST-Link V2-1 connections (for other connections, see [this link](https://github.com/arduino/OpenOCD/blob/master/contrib/60-openocd.rules) to find the correct config data to put into 70-local.rules):  
+#### Add USB rules
 Copy USB rules from openOCD to udev/rules.d folder:
 ```
 sudo cp /opt/openOCD/xpack-openocd-0.12.0-4/openocd/contrib/60-openocd.rules /etc/udev/rules.d
@@ -263,6 +160,7 @@ Implement the rule changes:
 ```
 sudo udevadm control --reload-rules
 ```
+
 #### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
 ```
 sudo vim ~/.bashrc
@@ -294,8 +192,106 @@ Run the .msi file installer
 Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
 Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 
-#### Flashing the code!  
-unplug the device from the USB port, replug it in, then re-attach it to WSL using the windows command prompt commands (again). 
+#### You are now ready to flash code!
+
+
+## For Linux (tested for ubuntu 22.04 LTS):  
+### Some syntax notes:  
+- The names of the xpack and arm-gnu files may be different depending on your system's architecture or OS.
+- These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
+
+#### Install gcc and vim
+```
+sudo apt-get install gcc make binutils
+sudo apt install vim
+```
+
+#### Install dependencies for gdb
+```
+sudo apt install libncurses5
+sudo apt-get install libncursesw5
+```
+
+#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
+```
+cd ~/Downloads
+tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
+cd /opt
+mkdir arm-gnu
+cd ~/Downloads
+sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
+export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
+echo $PATH
+```
+-> should see `arm-gnu/<arm-gnu unpacked folder name>/bin/` somewhere in the echoed output.  
+
+#### Test if GNU Arm Toolchain works:  
+```
+arm-none-eabi-gcc
+```
+-> if it outputs a fatal error and says "no input files", then you have a successful install!  
+
+#### Install OpenOCD (first download the needed linux .tar.gz file)   
+```
+cd ~/Downloads
+tar -xzf <name of linux .tar.gz file; should start with xpack>
+cd /opt
+mkdir openOCD
+cd ~/Downloads
+sudo mv <xpack unpacked folder name> /opt/openOCD
+export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
+echo $PATH
+```
+-> should see `/opt/openOCD/<xpack unpacked folder name>/bin/` somewhere in the echoed output.  
+
+#### Install STlink
+```
+sudo apt install stlink-tools
+```
+
+#### Add USB rules
+Copy USB rules from openOCD to udev/rules.d folder:
+```
+sudo cp /opt/openOCD/xpack-openocd-0.12.0-4/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+```
+Implement the rule changes:
+```
+sudo udevadm control --reload-rules
+```
+
+#### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
+```
+sudo vim ~/.bashrc
+```
+At the end of the file, add the following lines: 
+```
+export PATH="/opt/arm-gnu/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
+export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
+```
+Run the following to reset path var:
+```
+source ~/.bashrc
+```
+Verify that PATH has been updated: 
+```
+echo $PATH
+```
+-> should see the following:
+```
+/opt/openOCD/<xpack unpacked folder name>/bin/:/opt/arm-gnu/arm-gnu/<arm-gnu unpacked folder name>/bin/
+```
+somewhere in the PATH variable. 
+
+#### You are now ready to flash code!!!
+
+
+
+
+
+
+
+
+
 
 
 
