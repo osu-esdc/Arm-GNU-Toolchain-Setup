@@ -116,7 +116,35 @@ git config --list
 ```
 -> output of last command should show you your inputted username and email!
 
-Set git ssh stuff up:
+Set up Git SSH:
+```
+cd ~/.ssh
+```
+-> if this fails, then run 
+```
+mkdir ~/.ssh/
+```
+Create a ssh key for git:
+```
+ssh-keygen
+Enter file in which to save the key (/home/username/.ssh/id_rsa): id_ed25519
+```
+Copy the output from the following command:
+```
+cat id_ed25519
+```
+Go to git website -> click your git pfp in the upper right -> settings -> SSH and GPG Keys -> New SSH Key -> create a name for the SSH key and paste the previously copied output into the large text field.   
+
+Run the following to update ssh agent to use this key:
+```
+eval `ssh-agent -s`
+ssh-add
+```
+Verify that your ssh stuff works:
+```
+ssh -T git@github.com
+```
+-> should see `Hi git_username! You've successfully authenticated, but GitHub does not provide shell access.`!
 
 
 
