@@ -19,7 +19,7 @@ sudo apt-get install gcc make binutils
 
 #### Install dependencies   
 ```
-sudo apt install lubncurses5
+sudo apt install libncurses5
 ```
 
 #### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder  
