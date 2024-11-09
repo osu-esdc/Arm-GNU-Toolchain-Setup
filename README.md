@@ -33,7 +33,7 @@ sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
 export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see arm-gnu/<arm-gnu unpacked folder name>bin/ somewhere in the echoed output.  
+-> should see `arm-gnu/<arm-gnu unpacked folder name>bin/` somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
@@ -52,7 +52,7 @@ sudo mv <xpack unpacked folder name> /opt/openOCD
 export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see openOCD/<xpack unpacked folder name>/bin/ somewhere in the echoed output.  
+-> should see `/opt/openOCD/<xpack unpacked folder name>/bin/` somewhere in the echoed output.  
 
 #### Install STlink
 ```
@@ -80,7 +80,7 @@ Insert the following at the end of the PATH variable:
 `/opt/arm-gnu/<arm-gnu folder name>/bin:/opt/openOCD/<xpack folder name>/bin:/opt/stlink/src`
 
 ... So that your PATH variable looks something like this:
-PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"
+`PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"`
 
 
 
