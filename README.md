@@ -156,12 +156,14 @@ Add the following lines to the end:
 export EDITOR='vim'
 export VISUAL='vim'
 ```
-Then run:
+Run:
 ```
 sudo update-alternatives --config editor
+Press <enter> to keep the current choice[*], or type selection number: 3
+```
+```
 source ~/.bashrc
 ```
-Then enter the number that corresponds to vim.basic and hit enter
 
 #### Make it so that sudo doesn't require password
 ```
