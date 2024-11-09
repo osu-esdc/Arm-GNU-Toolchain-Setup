@@ -72,14 +72,14 @@ ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="660", GROUP="plugdev", 
 sudo udevadm control --reload-rules
 ```
 
-#### Add this stuff to PATH (permanently), IMPORTANT:
+#### Add this stuff to PATH (permanently), IMPORTANT:  
 ```
 sudo vi /etc/environment
 ```
-Insert the following at the end of the PATH variable:  
+Insert the following at the end of the PATH variable:    
 `/opt/arm-gnu/<arm-gnu folder name>/bin:/opt/openOCD/<xpack folder name>/bin:/opt/stlink/src`
 
-... So that your PATH variable looks something like this:
+... So that your PATH variable looks something like this:  
 `PATH="/usr/local/sbin:/usr/local/bin:/opt/arm-gnu/<arm-gnu unpacked folder name>/bin:/opt/openOCD/<xpack unpacked folder name>/bin:/opt/stlink/src"`
 
 
