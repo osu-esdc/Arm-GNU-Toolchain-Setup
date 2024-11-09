@@ -102,7 +102,10 @@ Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/w
 Download the .msi file from [here](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 Run the .msi file installer  
 
-Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)
+Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
+Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
+
+
 
 
 
