@@ -18,9 +18,10 @@ sudo apt-get install gcc make binutils
 sudo apt install vim
 ```
 
-#### Install dependencies - FIX
+#### Install dependencies for gdb
 ```
 sudo apt install libncurses5
+sudo apt-get install libncursesw5
 ```
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
@@ -212,9 +213,10 @@ sudo ls
 ```
 -> it should execute the command without asking for a password!
 
-#### Install dependencies
+#### Install dependencies for gdb
 ```
 sudo apt install libncurses5
+sudo apt-get install libncursesw5
 ```
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder); note: may need to change the name of the arm-gnu file based on differing architechtures/OS 
@@ -261,23 +263,6 @@ Implement the rule changes:
 ```
 sudo udevadm control --reload-rules
 ```
-
-
-
-*** NOT NEEDED?
-```
-sudo vim /etc/udev/rules.d/70-local.rules
-```
-Add the following line and then exit using `:wq`:
-```
-ATTRS{idVendor}=="0483", ATTRS{idProduct}=="374b", MODE="660", GROUP="plugdev", TAG+="uaccess"
-```
-Implement the rule changes:
-```
-sudo udevadm control --reload-rules
-```
-***
-
 #### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
 ```
 sudo vim ~/.bashrc
