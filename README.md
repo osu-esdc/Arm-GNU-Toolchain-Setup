@@ -7,7 +7,7 @@ Base-level links you will need:
 [ST-Link for Windows 7, 8, or 10](https://www.st.com/en/development-tools/stsw-link009.html#get-software) -> Download if you have Windows
 
 Some syntax notes:  
-- <xxx>: these angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
+- angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
 - These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
   
 ## For Linux (ubuntu 22.04 LTS):  
