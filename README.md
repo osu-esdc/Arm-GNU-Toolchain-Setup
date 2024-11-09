@@ -1,4 +1,4 @@
-# STM32-Setup_Guide
+# Arm GNU Toolchain Setup Guide
 #### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi/Vim, OpenOCD, STLink, and the Arm GNU Toolchain.  
 
 ## Required Downloads:
