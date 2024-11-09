@@ -171,7 +171,7 @@ sudo visudo
 ```
 This will open the sudoers file in the default text editor. Look for the line that contains the following:
 ```
-root   ALL=(ALL:ALL) ALL
+%sudo   ALL=(ALL:ALL) ALL
 ```
 Below that line, add the following:
 ```
@@ -225,6 +225,18 @@ sudo apt install stlink-tools
 
 #### Adding some stuff to allow ST-link to be registered as a valid device
 ###### For ST-Link V2-1 connections (for other connections, see [this link](https://github.com/arduino/OpenOCD/blob/master/contrib/60-openocd.rules) to find the correct config data to put into 70-local.rules):  
+Copy USB rules from openOCD to udev/rules.d folder:
+```
+sudo cp /opt/openOCD/xpack-openocd-0.12.0-4/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+```
+Implement the rule changes:
+```
+sudo udevadm control --reload-rules
+```
+
+
+
+*** NOT NEEDED?
 ```
 sudo vim /etc/udev/rules.d/70-local.rules
 ```
@@ -236,6 +248,7 @@ Implement the rule changes:
 ```
 sudo udevadm control --reload-rules
 ```
+***
 
 #### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
 ```
