@@ -63,8 +63,6 @@ ssh -T git@github.com
 - These instructions assume that downloaded files from the web go to the /c/users/username/Downloads folder path in your Windows OS. If they don't, then replace the path
   with the one that contains the previous downloads.
 - You only need to use 'username' and not just username when you have spaces in the username. This username refers to the Windows OS username. 
-  
-## For WSL:  
 
 #### Install gcc and vim  
 ```
