@@ -14,29 +14,43 @@ Base-level links you will need:
 sudo apt-get install gcc make binutils
 ```
 
-#### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder; if ~/Downloads is not where this folder is placed then replace Downloads with that folder  
+#### Install dependencies
+```
+sudo apt install lubncurses5
+```
+
+#### Install GNU-Arm Tooolchain -> first download the needed .tar.xz folder; if ~/Downloads is not where this folder is placed then replace Downloads with that parent folder  
 ```
 cd ~/Downloads
-tar -xjf <name of downloaded .tar.xz folder>
-cd /
-cd opt
-mkdir gcc-arm
+tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
+cd /opt
+mkdir arm-gnu
 cd ~/Downloads
-sudo mv <name of unpacked .tar.xz folder> /opt/gcc-arm
-cd opt
-sudo mv gcc-arm temp
-sudo mv temp/<name of unpacked .tar.xz folder> gcc-arm
-sudo rmdir temp
-export PATH="/opt/gcc-arm/bin/:$PATH"
+sudo mv <arm-gnu .tar.xz folder> /opt/arm-gnu
+export PATH="/opt/arm-gnu/<arm-gnu .tar.xz folder>/bin/:$PATH"
 echo $PATH
 ```
--> should see the path name of your gcc-arm/bin folder in the echoed output.  
+-> should see arm-gnu/bin/ somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
 arm-none-eabi-gcc
 ```
 -> if it outputs a fatal error and says "no input files", then you have a successful install!  
+
+#### Install OpenOCD -> first download the needed linux .tar.gz file; if ~/Downloads is not where this folder is placed then replace Downloads with that parent folder
+```
+cd ~/Downloads
+tar -xzf <name of linux .tar.gz file; should start with xpack>
+cd /opt
+mkdir openOCD
+cd ~/Downloads
+sudo mv <xpack .tar.gz folder> /opt/openOCD
+export PATH="/opt/openOCD/<xpack .tar.gz folder>/bin/:$PATH"
+echo $PATH
+```
+-> should see openOCD/<xpack .tar.gz folder>/bin/ somewhere in the echoed output.  
+
 
 
 
