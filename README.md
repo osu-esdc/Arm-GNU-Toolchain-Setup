@@ -29,11 +29,11 @@ tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
 cd /opt
 mkdir arm-gnu
 cd ~/Downloads
-sudo mv <arm-gnu folder name> /opt/arm-gnu
-export PATH="/opt/arm-gnu/<arm-gnu folder name>/bin/:$PATH"
+sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
+export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see arm-gnu/<arm-gnu folder name>bin/ somewhere in the echoed output.  
+-> should see arm-gnu/<arm-gnu unpacked folder name>bin/ somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
@@ -48,11 +48,11 @@ tar -xzf <name of linux .tar.gz file; should start with xpack>
 cd /opt
 mkdir openOCD
 cd ~/Downloads
-sudo mv <xpack folder name> /opt/openOCD
-export PATH="/opt/openOCD/<xpack folder name>/bin/:$PATH"
+sudo mv <xpack unpacked folder name> /opt/openOCD
+export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
 echo $PATH
 ```
--> should see openOCD/<xpack folder name>/bin/ somewhere in the echoed output.  
+-> should see openOCD/<xpack unpacked folder name>/bin/ somewhere in the echoed output.  
 
 #### Install STlink
 ```
