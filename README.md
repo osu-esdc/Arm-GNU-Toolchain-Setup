@@ -204,8 +204,10 @@ usbipd attach --wsl --busid <busid>
 ### Get VSCode Integration for WSL:   
 Requirements:   
 - VSCode downloaded on your Windows OS  
-- WSL downloaded and set up  
+- WSL downloaded and set up
+  
 Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)
+  
 ###### You can use the VSCode terminal for the client side of openOCD, and a WSL terminal for the server side of openOCD. 
 
 ### Allow .gdbinit functions to be run in gdb:  
