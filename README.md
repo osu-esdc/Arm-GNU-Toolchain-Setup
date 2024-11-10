@@ -1,6 +1,5 @@
 # Arm GNU Toolchain Setup Guide
-#### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi/Vim, OpenOCD, STLink, and the Arm GNU Toolchain.  
-###### NOTE: VSCode integration has not been set up yet.
+#### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi and VSCode, OpenOCD, STLink, and the Arm GNU Toolchain.  
 
 ## Required Downloads:
 Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
@@ -194,6 +193,12 @@ Open up command prompt as administrator, then follow these [directions](https://
 
 #### You are now ready to flash code!
 
+### Get VSCode Integration for WSL: 
+Requirements: 
+- VSCode downloaded on your Windows OS
+- WSL downloaded and set up
+Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)
+
 
 ## For Linux (tested for ubuntu 22.04 LTS):  
 ### Some syntax notes:  
@@ -283,6 +288,7 @@ echo $PATH
 somewhere in the PATH variable. 
 
 #### You are now ready to flash code!!!
+
 
 
 
