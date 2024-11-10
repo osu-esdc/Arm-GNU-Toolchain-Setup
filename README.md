@@ -191,13 +191,24 @@ Run the .msi file installer
 Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
 Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 
+#### Reattaching device every time you unplug-re plug in the device to WSL:
+In command prompt:
+```
+usbipd list
+```
+-> find the shared busid device
+```
+usbipd attach --wsl --busid <busid>
+```
+
 #### You are now ready to flash code!
 
 ### Get VSCode Integration for WSL:   
 Requirements:   
 - VSCode downloaded on your Windows OS  
 - WSL downloaded and set up  
-Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)  
+Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)
+###### You can use the VSCode terminal for the client side of openOCD, and a WSL terminal for the server side of openOCD. 
 
 
 ## For Linux (tested for ubuntu 22.04 LTS):  
