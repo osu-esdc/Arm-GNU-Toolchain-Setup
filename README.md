@@ -193,11 +193,11 @@ Open up command prompt as administrator, then follow these [directions](https://
 
 #### You are now ready to flash code!
 
-### Get VSCode Integration for WSL: 
-Requirements: 
-- VSCode downloaded on your Windows OS
-- WSL downloaded and set up
-Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)
+### Get VSCode Integration for WSL:   
+Requirements:   
+- VSCode downloaded on your Windows OS  
+- WSL downloaded and set up  
+Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)  
 
 
 ## For Linux (tested for ubuntu 22.04 LTS):  
