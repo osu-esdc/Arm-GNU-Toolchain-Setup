@@ -13,7 +13,7 @@ Download OpenOCD: get a linux .tar.gz file that matches your system's architecht
   
 ## <ins> For WSL 2 (only works with Ubuntu 22.04): </ins>
   
-### **Setup WSL (for those who have not yet set up WSL):**
+### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
 ```
 wsl.exe --install Ubuntu-22.04
