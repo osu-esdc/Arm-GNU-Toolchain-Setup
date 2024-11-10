@@ -1,18 +1,18 @@
-# Arm GNU Toolchain Setup Guide
+# <ins> Arm GNU Toolchain Setup Guide </ins>
 #### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi and VSCode, OpenOCD, STLink, and the Arm GNU Toolchain.  
-
+  
 ## Required Downloads:
 Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
 Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
-
+  
 Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
-
-
+  
+  
 ## For WSL 2 (only works with Ubuntu 22.04):
-
+  
 ### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
 ```
@@ -201,14 +201,25 @@ usbipd list
 usbipd attach --wsl --busid <busid>
 ```
 
-#### You are now ready to flash code!
-
 ### Get VSCode Integration for WSL:   
 Requirements:   
 - VSCode downloaded on your Windows OS  
 - WSL downloaded and set up  
 Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)
 ###### You can use the VSCode terminal for the client side of openOCD, and a WSL terminal for the server side of openOCD. 
+
+### Allow .gdbinit functions to be run in gdb:  
+```
+vim ~/.gdbinit
+```
+Add the following line to the file, then save and exit:  
+```
+set auto-load safe-path /
+```
+
+#### You are now ready to flash code! Just follow the directions in the Nucleo-L476RG-LED Repositor to program the STM32 Ref board for the first time.   
+
+
 
 
 ## For Linux (tested for ubuntu 22.04 LTS):  
