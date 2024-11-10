@@ -1,7 +1,7 @@
 # <ins> Arm GNU Toolchain Setup Guide </ins>
 #### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi and VSCode, OpenOCD, STLink, and the Arm GNU Toolchain.  
   
-## Required Downloads:
+## <ins> Required Downloads: </ins>
 Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
 Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
@@ -11,7 +11,7 @@ Download OpenOCD: get a linux .tar.gz file that matches your system's architecht
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
   
-## For WSL 2 (only works with Ubuntu 22.04):
+## <ins> For WSL 2 (only works with Ubuntu 22.04): </ins>
   
 ### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
@@ -222,7 +222,7 @@ set auto-load safe-path /
 
 
 
-## For Linux (tested for ubuntu 22.04 LTS):  
+## <ins> For Linux (tested for ubuntu 22.04 LTS): </ins>
 ### Some syntax notes:  
 - The names of the xpack and arm-gnu files may be different depending on your system's architecture or OS.
 - These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
