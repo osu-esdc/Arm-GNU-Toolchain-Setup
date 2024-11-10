@@ -191,7 +191,7 @@ Run the .msi file installer
 Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
 Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 
-#### Reattaching device every time you unplug-re plug in the device to WSL:
+#### Reattaching device every time you unplug-re plug in the device to WSL (Only do this if you have already done the previous steps):  
 In command prompt:
 ```
 usbipd list
@@ -309,7 +309,18 @@ echo $PATH
 ```
 somewhere in the PATH variable. 
 
-#### You are now ready to flash code!!!
+### Allow .gdbinit functions to be run in gdb:  
+```
+vim ~/.gdbinit
+```
+Add the following line to the file, then save and exit:  
+```
+set auto-load safe-path /
+```
+#### VSCode stuff: Just open the git repo in VSCode. I recommend running the client side of OpenOCD in VSCode and the server side of OpenOCD in a seperate terminal.
+
+#### You are now ready to flash code! Just follow the directions in the Nucleo-L476RG-LED Repositor to program the STM32 Ref board for the first time.   
+
 
 
 
