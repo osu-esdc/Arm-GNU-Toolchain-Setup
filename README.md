@@ -64,7 +64,7 @@ ssh -T git@github.com
   with the one that contains the previous downloads.
 - You only need to use 'username' and not just username when you have spaces in the username. This username refers to the Windows OS username. 
 
-#### Install gcc and vim  
+#### Install tools 
 ```
 sudo apt update
 sudo apt upgrade
@@ -232,9 +232,11 @@ set auto-load safe-path /
 - The names of the xpack and arm-gnu files may be different depending on your system's architecture or OS.
 - These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
 
-#### Install gcc and vim
+#### Install tools (if you don't already have them)
 ```
-sudo apt install gcc make binutils
+sudo apt install gcc
+sudo apt install make
+sudo apt install binutils
 sudo apt install vim
 ```
 
