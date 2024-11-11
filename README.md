@@ -44,7 +44,7 @@ Enter file in which to save the key (/home/username/.ssh/id_rsa): id_ed25519
 ```
 Copy the output from the following command:
 ```
-cat id_ed25519
+cat id_ed25519.pub
 ```
 Go to git website -> click your git pfp in the upper right -> settings -> SSH and GPG Keys -> New SSH Key -> create a name for the SSH key and paste the previously copied output into the large text field.   
 
