@@ -70,7 +70,6 @@ ssh -T git@github.com
 sudo apt-get install gcc make binutils
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt install vim
 ```
 
 #### Change the default text editor to vim  
