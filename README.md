@@ -181,7 +181,7 @@ echo $PATH
 somewhere in the PATH variable. 
 
 #### Getting USB support in WSL:  
-Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
 Download the .msi file from [here](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 Run the .msi file installer  
 
@@ -209,7 +209,7 @@ Requirements:
 - VSCode downloaded on your Windows OS  
 - WSL downloaded and set up
   
-Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)
+Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)  
   
 ###### You can use the VSCode terminal for the client side of openOCD, and a WSL terminal for the server side of openOCD. 
 
