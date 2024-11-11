@@ -23,8 +23,8 @@ After installation, restart your computer, and type in `wsl` into the search bar
 ### Setup git stuff in WSL:
 Set git username and password:
 ```
-git config --global user.name “username”
-git config --global user.email “email”
+git config --global user.name "username"
+git config --global user.email "email"
 git config --list
 ```
 -> output of last command should show you your inputted username and email!
