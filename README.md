@@ -68,8 +68,8 @@ ssh -T git@github.com
 #### Install gcc and vim  
 ```
 sudo apt-get install gcc make binutils
-sudo apt-get install update
-sudo apt-get install upgrade
+sudo apt-get update
+sudo apt-get upgrade
 sudo apt install vim
 ```
 
