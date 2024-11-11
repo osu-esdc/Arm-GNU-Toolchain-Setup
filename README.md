@@ -186,7 +186,7 @@ somewhere in the PATH variable.
 - Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
 - Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support) up until the detach part.  
 
-#### Reattaching USB device every time you unplug and then plug in the device to WSL (Only do this if you have already done the previous steps):  
+#### Quick commands to re-attach USB device to WSL after every disconnect:
 In command prompt:
 ```
 usbipd list
