@@ -110,7 +110,7 @@ sudo ls
 
 #### Install dependencies for gdb
 ```
-sudo apt install libncurses5
+sudo apt-get install libncurses5
 sudo apt-get install libncursesw5
 ```
 
