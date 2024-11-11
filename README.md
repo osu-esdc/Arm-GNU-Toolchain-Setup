@@ -66,9 +66,9 @@ ssh -T git@github.com
 
 #### Install gcc and vim  
 ```
-sudo apt-get install gcc make binutils
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt install gcc make binutils
+sudo apt update
+sudo apt upgrade
 ```
 
 #### Change the default text editor to vim  
@@ -109,8 +109,8 @@ sudo ls
 
 #### Install dependencies for gdb
 ```
-sudo apt-get install libncurses5
-sudo apt-get install libncursesw5
+sudo apt install libncurses5
+sudo apt install libncursesw5
 ```
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
@@ -123,9 +123,7 @@ cd /opt/arm-gnu
 sudo tar -xf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
 sudo rm arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
 export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
-echo $PATH
 ```
--> should see `arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/` somewhere in the echoed output.  
 
 #### Test if GNU Arm Toolchain works:  
 ```
@@ -183,7 +181,7 @@ echo $PATH
 somewhere in the PATH variable. 
 
 #### Getting USB support in WSL:  
-Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)    
+Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
 Download the .msi file from [here](https://github.com/dorssel/usbipd-win/wiki/WSL-support)  
 Run the .msi file installer  
 
@@ -199,6 +197,12 @@ usbipd list
 ```
 usbipd attach --wsl --busid <busid>
 ```
+
+In WSL terminal, run the following command to check if the USB device has been attached correctly:
+```
+lsusb
+```
+-> Should see the name of the attached USB device in the output.
 
 ### Get VSCode Integration for WSL:   
 Requirements:   
@@ -230,14 +234,14 @@ set auto-load safe-path /
 
 #### Install gcc and vim
 ```
-sudo apt-get install gcc make binutils
+sudo apt install gcc make binutils
 sudo apt install vim
 ```
 
 #### Install dependencies for gdb
 ```
 sudo apt install libncurses5
-sudo apt-get install libncursesw5
+sudo apt install libncursesw5
 ```
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
