@@ -29,15 +29,8 @@ git config --list
 ```
 -> output of last command should show you your inputted username and email!
 
-Set up Git SSH:
-```
-cd ~/.ssh
-```
--> if this fails, then run 
-```
-mkdir ~/.ssh/
-```
-Create a ssh key for git:
+##### Set up Git SSH:  
+Create a ssh key for git:  
 ```
 ssh-keygen
 Enter file in which to save the key (/home/username/.ssh/id_rsa): id_ed25519
