@@ -181,16 +181,12 @@ echo $PATH
 somewhere in the PATH variable. 
 
 #### Getting USB support in WSL:  
-Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
-Run the .msi file installer  
+- Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
+- Run the .msi file installer  
+- Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
+- Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support) up until the detach part.  
 
-Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
-Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support) up until the detach part. 
-Follow the directions in this [link](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
-
- 
-
-#### Reattaching device every time you unplug-re plug in the device to WSL (Only do this if you have already done the previous steps):  
+#### Reattaching USB device every time you unplug and then plug in the device to WSL (Only do this if you have already done the previous steps):  
 In command prompt:
 ```
 usbipd list
