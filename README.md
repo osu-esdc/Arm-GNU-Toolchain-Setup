@@ -16,6 +16,9 @@ Download OpenOCD: get a linux .tar.gz file that matches your system's architecht
 ### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
 ```
+wsl --install
+```
+```
 wsl.exe --install Ubuntu-22.04
 ```
 After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
