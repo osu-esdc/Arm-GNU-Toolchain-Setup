@@ -90,24 +90,6 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 ```
 source ~/.bashrc
 ```
-#### Make it so that sudo doesn't require password
-```
-sudo visudo
-```
-This will open the sudoers file in the default text editor. Look for the line that contains the following:
-```
-%sudo   ALL=(ALL:ALL) ALL
-```
-Below that line, add the following:
-```
-<wsl username>  ALL=(ALL) NOPASSWD:ALL
-```
-Save the changes and exit the text editor.
-Verify that the sudo configuration is correct by running a command with sudo:
-```
-sudo ls
-```
--> it should execute the command without asking for a password!
 
 #### Install dependencies for gdb
 ```
