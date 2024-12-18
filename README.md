@@ -41,8 +41,7 @@ cd ~/.ssh
 
 Create an ssh key for git:  
 ```
-ssh-keygen
-Enter file in which to save the key (/home/username/.ssh/id_rsa): id_ed25519
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ```
 Copy the output from the following command:
 ```
