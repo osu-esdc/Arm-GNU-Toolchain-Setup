@@ -6,7 +6,8 @@ Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolcha
 Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
-  
+
+? Delete ?
 Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
@@ -119,7 +120,13 @@ arm-none-eabi-gcc
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)
 notes: 
-- may need to change the name of the xpack file based on differing architechtures/OS  
+- may need to change the name of the xpack file based on differing architechtures/OS
+
+Use this instead?
+```
+git clone git://git.code.sf.net/p/openocd/code openocd
+```
+
 ```
 sudo mkdir /opt/openOCD
 sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-4-linux-x64.tar.gz /opt/openOCD
