@@ -121,7 +121,7 @@ arm-none-eabi-gcc
 notes: 
 - may need to change the name of the xpack file based on differing architechtures/OS   
 
-IGNORE THIS PART:::  
+IGNORE THIS PART: 
 ```
 sudo apt install libusb-1.0-0-dev
 ```
@@ -165,7 +165,7 @@ sudo vim ~/.bashrc
 At the end of the file, add the following lines: 
 ```
 export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin:$PATH"
-export PATH="/opt/openOCD/xpack-openocd-0.12.0-4/bin/:$PATH" ???
+export PATH="/opt/openOCD/xpack-openocd-0.12.0-4/bin/:$PATH"
 ```
 Run the following to reset path var:
 ```
