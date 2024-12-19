@@ -7,7 +7,6 @@ Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
 
-? Delete ?
 Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
@@ -120,12 +119,21 @@ arm-none-eabi-gcc
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)
 notes: 
-- may need to change the name of the xpack file based on differing architechtures/OS
+- may need to change the name of the xpack file based on differing architechtures/OS   
 
-Use this instead?
+IGNORE THIS PART:::  
 ```
-git clone git://git.code.sf.net/p/openocd/code openocd
+sudo apt install libusb-1.0-0-dev
 ```
+```
+git clone git://git.code.sf.net/p/openocd/code ~/openocd
+cd ~/openocd
+./bootstrap
+./configure --enable-stlink=yes
+make
+sudo make install
+```
+OKAY START HERE
 
 ```
 sudo mkdir /opt/openOCD
@@ -156,8 +164,8 @@ sudo vim ~/.bashrc
 ```
 At the end of the file, add the following lines: 
 ```
-export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
-export PATH="/opt/openOCD/xpack-openocd-0.12.0-4/bin/:$PATH"
+export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin:$PATH"
+export PATH="/opt/openOCD/xpack-openocd-0.12.0-4/bin/:$PATH" ???
 ```
 Run the following to reset path var:
 ```
