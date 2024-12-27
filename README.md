@@ -7,7 +7,7 @@ Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
 
-Download OpenOCD: get a linux .tar.gz file that matches your system's architechture. 
+Download OpenOCD: get a linux .tar.gz file that matches your system's architecture. 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
   
@@ -119,21 +119,7 @@ arm-none-eabi-gcc
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)
 notes: 
-- may need to change the name of the xpack file based on differing architechtures/OS   
-
-IGNORE THIS PART: 
-```
-sudo apt install libusb-1.0-0-dev
-```
-```
-git clone git://git.code.sf.net/p/openocd/code ~/openocd
-cd ~/openocd
-./bootstrap
-./configure --enable-stlink=yes
-make
-sudo make install
-```
-OKAY START HERE
+- may need to change the name of the xpack file based on differing architectures/OS   
 
 ```
 sudo mkdir /opt/openOCD
