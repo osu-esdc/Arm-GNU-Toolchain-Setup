@@ -5,7 +5,7 @@
 Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
 Because we are compiling to a 32-bit STM32 mcu, get this: `gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 `; should be a .tar.bz2 file
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
-[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
+[Arm GNU Toolchain]([https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads](https://developer.arm.com/downloads/-/gnu-rm))  
 
 Download OpenOCD: get the linux .tar.gz file that matches your system's architecture. The file must be version 0.12.0-1!!! 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
