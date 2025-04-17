@@ -7,7 +7,7 @@ Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
 
-Download OpenOCD: get a linux .tar.gz file that matches your system's architecture. 
+Download OpenOCD: get the linux .tar.gz file that matches your system's architecture. The file must be version 0.12.0-1!!! 
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
   
