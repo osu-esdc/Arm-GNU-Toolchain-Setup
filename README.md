@@ -3,7 +3,7 @@
   
 ## <ins> Required Downloads: </ins>
 Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
-Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.xz file
+Because we are compiling to a 32-bit STM32 mcu, get this: `gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 `; should be a .tar.bz2 file
 NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
 [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)  
 
