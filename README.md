@@ -1,17 +1,20 @@
 # <ins> Arm GNU Toolchain Setup Guide </ins>
-#### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi and VSCode, OpenOCD, STLink, and the Arm GNU Toolchain.  
-  
-## <ins> Required Downloads: </ins>
-Download the Arm GNU Toolchain: get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
-Because we are compiling to a 32-bit STM32 mcu, get this: `gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2 `; should be a .tar.bz2 file
-NOTE: Get a different one if your computer is not running either x86 64-bit architecture or x64 architecture.
-[Arm GNU Toolchain](https://developer.arm.com/downloads/-/gnu-rm)
+#### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi and VSCode, OpenOCD, STLink, and the Arm GNU Toolchain. MAC IS NOT YET SUPPORTED IN THIS GUIDE.
 
-Download OpenOCD: get the linux .tar.gz file that matches your system's architecture. The file must be version 0.12.0-1!!! 
+## <ins> Required Downloads: </ins>
+### DO NOT INSTALL THE WINDOWS VERSIONS!!! GET THE LINUX VERSIONS!!!
+### Download the Arm GNU Toolchain: 
+- get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
+- Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.bz2 file  
+- NOTE: Get a different one if your computer is NOT running x86 or x86_64 architecture.
+[Arm GNU Toolchain]([https://developer.arm.com/downloads/-/gnu-rm](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads))
+
+### Download OpenOCD: 
+- get the linux .tar.gz file that matches your system's architecture. The name should be something like `xpack-openocd-0.12.0-6-linux-x64.tar.gz` for Linux x86_64 architectures. Get the newest version (0.12.0-6):  
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
-  
 ## <ins> For WSL 2 (only works with Ubuntu 22.04): </ins>
+## AGAIN, THIS ONLY WORKS FOR UBUNTU 22.04 IN WSL!!!
   
 ### Setup WSL (for those who have not yet set up WSL):
 In Windows Powershell:
@@ -61,9 +64,7 @@ ssh -T git@github.com
 -> should see `Hi git_username! You've successfully authenticated, but GitHub does not provide shell access.`!
 
 ### Some syntax notes:  
-- Angle brackets hold a name that is unique/different for various users. Fill these out with the relevant file name.  
-- These instructions assume that downloaded files from the web go to the /c/users/username/Downloads folder path in your Windows OS. If they don't, then replace the path
-  with the one that contains the previous downloads.
+- These instructions assume that downloaded files from the web go to the /c/users/username/Downloads folder path in your Windows OS. If they don't, then replace the path with the one that contains the previous downloads.
 - You only need to use 'username' and not just username when you have spaces in the username. This username refers to the Windows OS username. 
 
 #### Install tools 
@@ -74,6 +75,13 @@ sudo apt install gcc
 sudo apt install make
 sudo apt install binutils
 ```
+
+### Quick Notes on using Vim
+- Use :wq to save and quit
+- j = down
+- k = up
+- l = right
+- h = left
 
 #### Change the default text editor to vim  
 ```
@@ -103,29 +111,20 @@ sudo apt install libncursesw5
 notes:   
 - may need to change the name of the arm-gnu file based on differing architechtures/OS    
 ```
-sudo mkdir /opt/arm-gnu
-sudo mv /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz /opt/arm-gnu
-cd /opt/arm-gnu
-sudo tar -xf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
-sudo rm arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
-export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/:$PATH"
+sudo mv /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz /opt
+cd /opt
+sudo tar -xf arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+sudo rm arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
 ```
-
-#### Test if GNU Arm Toolchain works:  
-```
-arm-none-eabi-gcc
-```
--> if it outputs a fatal error and says "no input files", then you have a successful install!  
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)
 notes: 
 - may need to change the name of the xpack file based on differing architectures/OS   
 
 ```
-sudo mkdir /opt/openOCD
-sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-4-linux-x64.tar.gz /opt/openOCD
-cd /opt/openOCD
-sudo tar -xzf xpack-openocd-0.12.0-4-linux-x64.tar.gz
+sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz /opt
+cd /opt
+sudo tar -xzf xpack-openocd-0.12.0-6-linux-x64.tar.gz
 sudo rm xpack-openocd-0.12.0-4-linux-x64.tar.gz
 ```
 
@@ -137,7 +136,7 @@ sudo apt install stlink-tools
 #### Add USB rules
 Copy USB rules from openOCD to udev/rules.d folder:
 ```
-sudo cp /opt/openOCD/xpack-openocd-0.12.0-4/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+sudo cp /opt/openOCD/xpack-openocd-0.12.0-6/openocd/contrib/60-openocd.rules /etc/udev/rules.d
 ```
 Implement the rule changes:
 ```
@@ -150,8 +149,8 @@ sudo vim ~/.bashrc
 ```
 At the end of the file, add the following lines: 
 ```
-export PATH="/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin:$PATH"
-export PATH="/opt/openOCD/xpack-openocd-0.12.0-4/bin/:$PATH"
+export PATH="/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin:$PATH"
+export PATH="/opt/xpack-openocd-0.12.0-6/bin/:$PATH"
 ```
 Run the following to reset path var:
 ```
@@ -163,7 +162,7 @@ echo $PATH
 ```
 -> should see the following:
 ```
-/opt/openOCD/xpack-openocd-0.12.0-4/bin/:/opt/arm-gnu/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/
+/opt/xpack-openocd-0.12.0-6/bin/:/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/
 ```
 somewhere in the PATH variable. 
 
@@ -189,6 +188,14 @@ lsusb
 ```
 -> Should see the name of the attached USB device in the output.
 
+### Testing OpenOCD and GNU ARM Toolchain:
+Run the following commands:
+```
+arm-none-eabi-gcc --version
+openocd --version
+```
+If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (14.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev-blahblahblah nobody reading all that for openocd)!  
+
 ### Get VSCode Integration for WSL:   
 Requirements:   
 - VSCode downloaded on your Windows OS  
@@ -207,7 +214,7 @@ Add the following line to the file, then save and exit:
 set auto-load safe-path /
 ```
 
-#### You are now ready to flash code! Just follow the directions in the Nucleo-L476RG-LED Repositor to program the STM32 Ref board for the first time.   
+#### You are now ready to flash code! Just follow the directions in the Nucleo-F446RE-LED Repository to program the club's STM32 Reference boards for the first time.   
 
 
 
@@ -233,35 +240,19 @@ sudo apt install libncursesw5
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
 ```
-cd ~/Downloads
-tar -xf <name of downloaded .tar.xz folder; should start with arm-gnu>
+sudo mv ~/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz /opt
 cd /opt
-mkdir arm-gnu
-cd ~/Downloads
-sudo mv <arm-gnu unpacked folder name> /opt/arm-gnu
-export PATH="/opt/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
-echo $PATH
+sudo tar -xf arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+sudo rm arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
 ```
--> should see `arm-gnu/<arm-gnu unpacked folder name>/bin/` somewhere in the echoed output.  
-
-#### Test if GNU Arm Toolchain works:  
-```
-arm-none-eabi-gcc
-```
--> if it outputs a fatal error and says "no input files", then you have a successful install!  
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)   
 ```
-cd ~/Downloads
-tar -xzf <name of linux .tar.gz file; should start with xpack>
+sudo mv ~/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz /opt
 cd /opt
-mkdir openOCD
-cd ~/Downloads
-sudo mv <xpack unpacked folder name> /opt/openOCD
-export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
-echo $PATH
+sudo tar -xzf xpack-openocd-0.12.0-6-linux-x64.tar.gz
+sudo rm xpack-openocd-0.12.0-4-linux-x64.tar.gz
 ```
--> should see `/opt/openOCD/<xpack unpacked folder name>/bin/` somewhere in the echoed output.  
 
 #### Install STlink
 ```
@@ -271,7 +262,7 @@ sudo apt install stlink-tools
 #### Add USB rules
 Copy USB rules from openOCD to udev/rules.d folder:
 ```
-sudo cp /opt/openOCD/xpack-openocd-0.12.0-4/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+sudo cp /opt/openOCD/xpack-openocd-0.12.0-6/openocd/contrib/60-openocd.rules /etc/udev/rules.d
 ```
 Implement the rule changes:
 ```
@@ -284,8 +275,8 @@ sudo vim ~/.bashrc
 ```
 At the end of the file, add the following lines: 
 ```
-export PATH="/opt/arm-gnu/arm-gnu/<arm-gnu unpacked folder name>/bin/:$PATH"
-export PATH="/opt/openOCD/<xpack unpacked folder name>/bin/:$PATH"
+export PATH="/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin:$PATH"
+export PATH="/opt/xpack-openocd-0.12.0-6/bin/:$PATH"
 ```
 Run the following to reset path var:
 ```
@@ -297,9 +288,17 @@ echo $PATH
 ```
 -> should see the following:
 ```
-/opt/openOCD/<xpack unpacked folder name>/bin/:/opt/arm-gnu/arm-gnu/<arm-gnu unpacked folder name>/bin/
+/opt/xpack-openocd-0.12.0-6/bin/:/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/
 ```
 somewhere in the PATH variable. 
+
+### Testing OpenOCD and GNU ARM Toolchain:
+Run the following commands:
+```
+arm-none-eabi-gcc --version
+openocd --version
+```
+If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (14.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev-blahblahblah nobody reading all that for openocd)!  
 
 ### Allow .gdbinit functions to be run in gdb:  
 ```
@@ -311,7 +310,7 @@ set auto-load safe-path /
 ```
 #### VSCode stuff: Just open the git repo in VSCode. I recommend running the client side of OpenOCD in VSCode and the server side of OpenOCD in a seperate terminal.
 
-#### You are now ready to flash code! Just follow the directions in the Nucleo-L476RG-LED Repositor to program the STM32 Ref board for the first time.   
+#### You are now ready to flash code! Just follow the directions in the Nucleo-F447RE-LED Repository to program the club's STM32 reference boards for the first time.   
 
 
 
