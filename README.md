@@ -123,7 +123,7 @@ notes:
 ```
 sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz /opt
 sudo tar -xzf /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
-sudo rm /opt/xpack-openocd-0.12.0-4-linux-x64.tar.gz
+sudo rm /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
 ```
 
 #### Install STlink
@@ -247,7 +247,7 @@ sudo rm /opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
 ```
 sudo mv ~/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz /opt
 sudo tar -xzf /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
-sudo rm /opt/xpack-openocd-0.12.0-4-linux-x64.tar.gz
+sudo rm /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
 ```
 
 #### Install STlink
