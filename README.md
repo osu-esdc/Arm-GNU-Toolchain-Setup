@@ -111,9 +111,7 @@ sudo apt install libncursesw5
 notes:   
 - may need to change the name of the arm-gnu file based on differing architechtures/OS    
 ```
-sudo mv /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz /opt
-sudo tar -xf /opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
-sudo rm /opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+sudo tar -xf /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
 ```
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)
@@ -121,9 +119,7 @@ notes:
 - may need to change the name of the xpack file based on differing architectures/OS   
 
 ```
-sudo mv /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz /opt
-sudo tar -xzf /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
-sudo rm /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
+sudo tar -xzf /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz -C /opt
 ```
 
 #### Install STlink
@@ -238,16 +234,12 @@ sudo apt install libncursesw5
 
 #### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
 ```
-sudo mv ~/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz /opt
-sudo tar -xf /opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
-sudo rm /opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz
+sudo tar -xf ~/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
 ```
 
 #### Install OpenOCD (first download the needed linux .tar.gz file)   
 ```
-sudo mv ~/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz /opt
-sudo tar -xzf /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
-sudo rm /opt/xpack-openocd-0.12.0-6-linux-x64.tar.gz
+sudo tar -xzf ~/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz -C /opt
 ```
 
 #### Install STlink
