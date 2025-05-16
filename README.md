@@ -298,7 +298,7 @@ set auto-load safe-path /
 ```
 #### VSCode stuff: Just open the git repo in VSCode. I recommend running the client side of OpenOCD in VSCode and the server side of OpenOCD in a seperate terminal.
 
-#### You are now ready to flash code! Just follow the directions in the Nucleo-F447RE-LED Repository to program the club's STM32 reference boards for the first time.   
+#### You are now ready to flash code! Just follow the directions in the Nucleo-F446RE-LED Repository to program the club's STM32 reference boards for the first time.   
 
 
 
