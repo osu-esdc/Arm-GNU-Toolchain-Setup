@@ -130,7 +130,7 @@ sudo apt install stlink-tools
 #### Add USB rules
 Copy USB rules from openOCD to udev/rules.d folder:
 ```
-sudo cp /opt/openOCD/xpack-openocd-0.12.0-6/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+sudo cp /opt/xpack-openocd-0.12.0-6/openocd/contrib/60-openocd.rules /etc/udev/rules.d
 ```
 Implement the rule changes:
 ```
