@@ -16,13 +16,16 @@
 ## <ins> For WSL 2 (only works with Ubuntu 22.04): </ins>
 ## AGAIN, THIS ONLY WORKS FOR UBUNTU 22.04 IN WSL!!!
   
-### Setup WSL (for those who have not yet set up WSL):
+### Setup WSL:
 In Windows Powershell:
 ```
 wsl --install
 ```
 ```
 wsl.exe --install Ubuntu-22.04
+```
+```
+wsl --set-default Ubuntu-22.04
 ```
 After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
 
