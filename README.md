@@ -185,6 +185,11 @@ lsusb
 ```
 -> Should see the name of the attached USB device in the output.
 
+If you get an error like `usbipd: error: Loading vhci_hcd failed.`, then run this in the WSL terminal, then the usbipd attach command above:
+```
+sudo modprobe vhci_hcd
+```
+
 ### Testing OpenOCD and GNU ARM Toolchain:
 Run the following commands:
 ```
