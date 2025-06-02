@@ -13,19 +13,17 @@
 - get the linux .tar.gz file that matches your system's architecture. The name should be something like `xpack-openocd-0.12.0-6-linux-x64.tar.gz` for Linux x86_64 architectures. Get the newest version (0.12.0-6):  
 [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
   
-## <ins> For WSL 2 (only works with Ubuntu 22.04): </ins>
-## AGAIN, THIS ONLY WORKS FOR UBUNTU 22.04 IN WSL!!!
-  
+## <ins> For WSL 2 (Supports Ubuntu 22.04 & 24.04) </ins>
 ### Setup WSL:
 In Windows Powershell:
 ```
 wsl --install
 ```
 ```
-wsl.exe --install Ubuntu-22.04
+wsl.exe --install Ubuntu-24.04
 ```
 ```
-wsl --set-default Ubuntu-22.04
+wsl --set-default Ubuntu-24.04
 ```
 After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
 
@@ -104,7 +102,13 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 source ~/.bashrc
 ```
 
-#### Install dependencies for gdb
+#### Install dependencies for USB
+```
+sudo modprobe vhci_hcd
+```
+
+#### GDB dependencies for older versions of OpenOCD/arm GNU Toolchain (will only work in Ubuntu 22.04):
+You can ignore this part if you are using a new version of OpenOCD and arm GNU toolchain. 
 ```
 sudo apt install libncurses5
 sudo apt install libncursesw5
@@ -185,18 +189,13 @@ lsusb
 ```
 -> Should see the name of the attached USB device in the output.
 
-If you get an error like `usbipd: error: Loading vhci_hcd failed.`, then run this in the WSL terminal, then the usbipd attach command above:
-```
-sudo modprobe vhci_hcd
-```
-
 ### Testing OpenOCD and GNU ARM Toolchain:
 Run the following commands:
 ```
 arm-none-eabi-gcc --version
 openocd --version
 ```
-If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (14.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev-blahblahblah nobody reading all that for openocd)!  
+If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (14.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev... for openocd)!  
 
 ### Get VSCode Integration for WSL:   
 Requirements:   
@@ -220,7 +219,7 @@ set auto-load safe-path /
 
 
 
-## <ins> For Linux (tested for ubuntu 22.04 LTS): </ins>
+## <ins> For Linux (tested for Ubuntu 22.04 LTS, 24.04 will probably work if you are using new versions of OpenOCD/arm GNU toolchain): </ins>
 ### Some syntax notes:  
 - The names of the xpack and arm-gnu files may be different depending on your system's architecture or OS.
 - These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
@@ -233,7 +232,8 @@ sudo apt install binutils
 sudo apt install vim
 ```
 
-#### Install dependencies for gdb
+#### GDB dependencies for older versions of OpenOCD/arm GNU Toolchain (will only work in Ubuntu 22.04):
+You can ignore this part if you are using a new version of OpenOCD and arm GNU toolchain. 
 ```
 sudo apt install libncurses5
 sudo apt install libncursesw5
