@@ -171,7 +171,6 @@ somewhere in the PATH variable.
 - Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
 - Run the .msi file installer  
 - Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
-- Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support) up until the detach part.
 
 #### Setting up USB device for WSL:
 Open Command Prompt AS ADMINISTRATOR, then run this: 
