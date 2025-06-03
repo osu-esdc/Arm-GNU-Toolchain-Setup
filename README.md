@@ -171,7 +171,18 @@ somewhere in the PATH variable.
 - Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
 - Run the .msi file installer  
 - Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
-- Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support) up until the detach part.  
+- Open up command prompt as administrator, then follow these [directions](https://github.com/dorssel/usbipd-win/wiki/WSL-support) up until the detach part.
+
+#### Setting up USB device for WSL:
+Open Command Prompt AS ADMINISTRATOR, then run this: 
+```
+usbipd list
+```
+-> This command outputs the BUSIDs and names for any USB device connected to your computer. Find the BUSID associated with the ST-Link Debug device, then use it in the next command: 
+```
+usbipd bind --busid <BUSID>
+usbipd attach --wsl --busid <BUSID>
+```
 
 #### Quick commands to re-attach USB device to WSL after every disconnect:
 In command prompt:
@@ -180,7 +191,7 @@ usbipd list
 ```
 -> find the shared busid device
 ```
-usbipd attach --wsl --busid <busid>
+usbipd attach --wsl --busid <BUSID>
 ```
 
 In WSL terminal, run the following command to check if the USB device has been attached correctly:
