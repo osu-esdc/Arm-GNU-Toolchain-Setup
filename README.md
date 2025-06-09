@@ -102,11 +102,6 @@ Press <enter> to keep the current choice[*], or type selection number: 3
 source ~/.bashrc
 ```
 
-#### Install dependencies for USB
-```
-sudo modprobe vhci_hcd
-```
-
 #### GDB dependencies for older versions of OpenOCD/arm GNU Toolchain (will only work in Ubuntu 22.04):
 You can ignore this part if you are using a new version of OpenOCD and arm GNU toolchain. 
 ```
@@ -152,6 +147,7 @@ At the end of the file, add the following lines:
 ```
 export PATH="/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin:$PATH"
 export PATH="/opt/xpack-openocd-0.12.0-6/bin/:$PATH"
+sudo modprobe vhci_hcd
 ```
 Run the following to reset path var:
 ```
