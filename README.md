@@ -1,21 +1,42 @@
-# <ins> Arm GNU Toolchain Setup Guide </ins>
-#### This repo contains setup guides for Windows and Linux users who want to program and debug STM32s using Vi and VSCode, OpenOCD, STLink, and the Arm GNU Toolchain. MAC IS NOT YET SUPPORTED IN THIS GUIDE.
+# Arm GNU Toolchain and OpenOCD Setup Guide 
+- Supports Windows and Linux Hosts
+- Sets up development environment for programming STM32 (among other) microcontrollers
+- OpenOCD setup - A method to debug and program microcontrollers
+- Arm GNU toolchain setup - A toolchain including cross compilers, binary code analyzers, an assembler, and more
 
+&nbsp;
 ## <ins> Required Downloads: </ins>
-### DO NOT INSTALL THE WINDOWS VERSIONS!!! GET THE LINUX VERSIONS!!!
 ### Download the Arm GNU Toolchain: 
-- get one of the x86_64 Linux hosted cross toolchain if your WSL instance is running Ubuntu on an x86 cpu.  
-- Because we are compiling to a 32-bit STM32 mcu, get this: `arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz`; should be a .tar.bz2 file  
-- NOTE: Get a different one if your computer is NOT running x86 or x86_64 architecture.  
-[Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+- If your computer has an Intel or AMD CPU (x86_64), download `arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz` from 
+<ins> [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) </ins>
+
+- If your computer has an ARM-based CPU, download `arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi.tar.xz` from 
+<ins> [Arm GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads) </ins>
+
 
 ### Download OpenOCD: 
-- get the linux .tar.gz file that matches your system's architecture. The name should be something like `xpack-openocd-0.12.0-6-linux-x64.tar.gz` for Linux x86_64 architectures. Get the newest version (0.12.0-6):  
-[OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases)
+- If your computer has an Intel or AMD CPU (x86_64), 
+download `xpack-openocd-0.12.0-7-linux-x64.tar.gz` from 
+<ins> [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) </ins>
+
+- If your computer has an ARM-based CPU, download `xpack-openocd-0.12.0-7-linux-arm64.tar.gz`
+<ins> [OpenOCD](https://github.com/xpack-dev-tools/openocd-xpack/releases) </ins>
+
+<ins> NOTE</ins> that this guide's commands use the x86_64 names for these files. If you have an ARM-based CPU, you will
+need to adjust the names of these files accordingly. 
   
-## <ins> For WSL 2 (Supports Ubuntu 22.04 & 24.04) </ins>
-### Setup WSL:
-In Windows Powershell:
+&nbsp;
+## <ins> Installation Guide
+### <ins> NOTE:</ins>
+- Directions that start with `Windows Hosts` should be ran by users using Windows as their host OS. 
+- Directions that start with `Linux Hosts` should be ran by users using Linux as their host OS. 
+- Directions that start with `All Hosts` either should be ran by all users. 
+- Guide has been tested on Ubuntu 24.04 Linux Host and Windows 10 Host. 
+- Commands should be ran in Linux terminal unless explicitly stated otherwise (i.e., run in Command Prompt)
+
+&nbsp;
+### `Windows Hosts` Setup WSL (if not already set up):
+Open Command Prompt as administrator, then run:
 ```
 wsl --install
 ```
@@ -27,7 +48,131 @@ wsl --set-default Ubuntu-24.04
 ```
 After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
 
-### Setup git stuff in WSL:
+&nbsp;
+### `All Hosts` Install tools 
+```
+sudo apt update && sudo apt upgrade
+sudo apt install gcc make binutils stlink-tools libncurses-dev 
+```
+
+&nbsp;
+### `All Hosts` Set up environmental variables 
+<ins> NOTE:</ins> Make sure you know what path your toolchain/OpenOCD files were downloaded to. If they
+are different than the examples in this section, replace them with the actual paths. 
+- `Windows Hosts` (make sure to replace <WinUser> with your Windows host username) </ins>:
+```
+export DOWNLOAD_DIR=/mnt/c/users/<WinUser>/Downloads
+```
+-> If WinUser has a space in it `(i.e., Shirley Temple)`, then surround it with single quotation marks `(i.e., 'Shirley Temple')`
+- `Linux Hosts`
+```
+export DOWNLOAD_DIR=~/Downloads
+```
+
+&nbsp;
+### `All Hosts` Install Arm-GNU Toolchain and OpenOCD
+```
+sudo tar -xf $DOWNLOAD_DIR/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
+```
+```
+sudo tar -xzf $DOWNLOAD_DIR/xpack-openocd-0.12.0-7-linux-x64.tar.gz -C /opt
+```
+
+&nbsp;
+### `All Hosts` Add USB rules
+Copy USB rules from openOCD to udev/rules.d folder:
+```
+sudo cp /opt/xpack-openocd-0.12.0-7/openocd/contrib/60-openocd.rules /etc/udev/rules.d
+```
+Implement the rule changes:
+```
+sudo udevadm control --reload-rules
+```
+
+&nbsp;
+### `All Hosts` Add tool executables to PATH
+<ins> NOTE:</ins> if you are not using bash as your shell, then replace bashrc with your chosen shell. Ubuntu defaults to bash. 
+```
+echo -e '\nexport PATH="/opt/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin:/opt/xpack-openocd-0.12.0-7/bin/:$PATH"' >> ~/.bashrc
+```
+```
+source ~/.bashrc
+```
+
+&nbsp;
+### `Windows Hosts` Get USB support in WSL
+- Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
+- Run the .msi file installer  
+- Before the next step: make sure that the microcontroller you want to use is currently plugged into your machine  
+
+&nbsp;
+### `Windows Hosts` Set up USB device for WSL
+Add the Virtual USB port driver into a configuration file that runs at WSL boot:
+```
+echo "vhci_hcd" | sudo tee /etc/modules-load.d/wsl-usb.conf
+```
+Open Command Prompt as administrator, then run this: 
+```
+usbipd list
+```
+-> This command outputs the BUSIDs and names for any USB device connected to your computer. Find the BUSID associated with the ST-Link Debug device, then use it in the next command: 
+```
+usbipd bind --busid <BUSID>
+usbipd attach --wsl --busid <BUSID>
+```
+Restart WSL: 
+```
+wsl --shutdown
+```
+-> Open WSL again. 
+
+&nbsp;
+### `Windows Hosts` Quick commands to re-attach USB device to WSL after every disconnect
+In Command Prompt:
+```
+usbipd list
+```
+-> find the shared busid device
+```
+usbipd attach --wsl --busid <BUSID>
+```
+In WSL terminal, run the following command to check if the USB device has been attached correctly:
+```
+lsusb
+```
+-> Should see the name of the attached USB device in the output.
+
+&nbsp;
+### `All Hosts` Testing OpenOCD and GNU ARM Toolchain
+Run the following commands:
+```
+arm-none-eabi-gcc --version
+openocd --version
+```
+-> If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (15.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev... for openocd)!  
+
+&nbsp;
+## Optional (but recommended) extra configurations and advices
+
+### `Windows Hosts` Optional: Get VSCode Integration for WSL   
+Requirements:   
+- VSCode downloaded on your Windows OS  
+- WSL downloaded and set up  
+
+Follow the instructions [here](https://code.visualstudio.com/docs/remote/wsl)  
+  
+&nbsp;
+### `All Hosts` Optional: Allow .gdbinit functions to be run in gdb
+```
+vim ~/.gdbinit
+```
+Add the following line to the file, then save and exit:  
+```
+set auto-load safe-path /
+```
+
+&nbsp;
+### `All Hosts` Optional: Set up Git SSH to push changes to the remote GitHub repository
 Set git username and password:
 ```
 git config --global user.name "username"
@@ -36,7 +181,8 @@ git config --list
 ```
 -> output of last command should show you your inputted username and email!
 
-#### Set up Git SSH:  
+&nbsp;
+### `All Hosts` Optional: Set up SSH keys for GitHub
 Make the .ssh directory if it does not exist yet and then cd into it
 ```
 mkdir ~/.ssh
@@ -51,7 +197,8 @@ Copy the output from the following command:
 ```
 cat ~/.ssh/id_ed25519.pub
 ```
-Go to git website -> click your git pfp in the upper right -> settings -> SSH and GPG Keys -> New SSH Key -> create a name for the SSH key and paste the previously copied output into the large text field.   
+Go to git website -> click your git pfp in the upper right -> settings -> SSH and GPG Keys -> New SSH Key -> 
+create a name for the SSH key and paste the previously copied output into the large text field.   
 
 Run the following to update ssh agent to use this key:
 ```
@@ -64,123 +211,9 @@ ssh -T git@github.com
 ```
 -> should see `Hi git_username! You've successfully authenticated, but GitHub does not provide shell access.`!
 
-### Some syntax notes:  
-- These instructions assume that downloaded files from the web go to the /c/users/username/Downloads folder path in your Windows OS. If they don't, then replace the path with the one that contains the previous downloads.
-- You only need to use 'username' and not just username when you have spaces in the username. This username refers to the Windows OS username. 
-
-#### Install tools 
-```
-sudo apt update
-sudo apt upgrade
-sudo apt install gcc
-sudo apt install make
-sudo apt install binutils
-```
-
-### Quick Notes on using Vim
-- Use :wq to save and quit
-- j = down
-- k = up
-- l = right
-- h = left
-
-#### Change the default text editor to vim  
-```
-sudo vim ~/.bashrc
-```
-Add the following lines to the end:  
-```
-export EDITOR='vim'
-export VISUAL='vim'
-```
-Run:
-```
-sudo update-alternatives --config editor
-Press <enter> to keep the current choice[*], or type selection number: 3
-```
-```
-source ~/.bashrc
-```
-
-#### GDB dependencies for older versions of OpenOCD/arm GNU Toolchain (will only work in Ubuntu 22.04):
-You can ignore this part if you are using a new version of OpenOCD and arm GNU toolchain. 
-```
-sudo apt install libncurses5
-sudo apt install libncursesw5
-```
-
-#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
-notes:   
-- may need to change the name of the arm-gnu file based on differing architechtures/OS    
-```
-sudo tar -xf /mnt/c/users/'username'/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
-```
-
-#### Install OpenOCD (first download the needed linux .tar.gz file)
-notes: 
-- may need to change the name of the xpack file based on differing architectures/OS   
-
-```
-sudo tar -xzf /mnt/c/users/'username'/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz -C /opt
-```
-
-#### Install STlink
-```
-sudo apt install stlink-tools
-```
-
-#### Add USB rules
-Copy USB rules from openOCD to udev/rules.d folder:
-```
-sudo cp /opt/xpack-openocd-0.12.0-6/openocd/contrib/60-openocd.rules /etc/udev/rules.d
-```
-Implement the rule changes:
-```
-sudo udevadm control --reload-rules
-```
-
-#### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
-```
-sudo vim ~/.bashrc
-```
-At the end of the file, add the following lines: 
-```
-export PATH="/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin:$PATH"
-export PATH="/opt/xpack-openocd-0.12.0-6/bin/:$PATH"
-sudo modprobe vhci_hcd
-```
-Run the following to reset path var:
-```
-source ~/.bashrc
-```
-Verify that PATH has been updated: 
-```
-echo $PATH
-```
--> should see the following:
-```
-/opt/xpack-openocd-0.12.0-6/bin/:/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/
-```
-somewhere in the PATH variable. 
-
-#### Getting USB support in WSL:  
-- Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
-- Run the .msi file installer  
-- Before this step: make sure that the microcontroller you want to use is currently plugged into your machine!!!  
-
-#### Setting up USB device for WSL:
-Open Command Prompt AS ADMINISTRATOR, then run this: 
-```
-usbipd list
-```
--> This command outputs the BUSIDs and names for any USB device connected to your computer. Find the BUSID associated with the ST-Link Debug device, then use it in the next command: 
-```
-usbipd bind --busid <BUSID>
-usbipd attach --wsl --busid <BUSID>
-```
-
-#### Quick commands to re-attach USB device to WSL after every disconnect:
-In command prompt:
+&nbsp;
+### `Windows Hosts` Tips: Quick commands to re-attach USB device to WSL after every disconnect
+In Command Prompt:
 ```
 usbipd list
 ```
@@ -188,144 +221,10 @@ usbipd list
 ```
 usbipd attach --wsl --busid <BUSID>
 ```
-
 In WSL terminal, run the following command to check if the USB device has been attached correctly:
 ```
 lsusb
 ```
 -> Should see the name of the attached USB device in the output.
 
-### Testing OpenOCD and GNU ARM Toolchain:
-Run the following commands:
-```
-arm-none-eabi-gcc --version
-openocd --version
-```
-If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (14.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev... for openocd)!  
-
-### Get VSCode Integration for WSL:   
-Requirements:   
-- VSCode downloaded on your Windows OS  
-- WSL downloaded and set up
-  
-Follow the instructions at this [link](https://code.visualstudio.com/docs/remote/wsl)  
-  
-###### You can use the VSCode terminal for the client side of openOCD, and a WSL terminal for the server side of openOCD. 
-
-### Allow .gdbinit functions to be run in gdb:  
-```
-vim ~/.gdbinit
-```
-Add the following line to the file, then save and exit:  
-```
-set auto-load safe-path /
-```
-
-#### You are now ready to flash code! Just follow the directions in the Nucleo-F446RE-LED Repository to program the club's STM32 Reference boards for the first time, available [here](https://github.com/osu-esdc/Nucleo-F446RE-LED).  
-
-
-
-## <ins> For Linux (tested for Ubuntu 22.04 LTS, 24.04 will probably work if you are using new versions of OpenOCD/arm GNU toolchain): </ins>
-### Some syntax notes:  
-- The names of the xpack and arm-gnu files may be different depending on your system's architecture or OS.
-- These instructions assume that downloaded files from the web go to ~/Downloads; if they don't, then use the pathname of the folder the downloaded files go to in place of ~/Downloads.
-
-#### Install tools (if you don't already have them)
-```
-sudo apt install gcc
-sudo apt install make
-sudo apt install binutils
-sudo apt install vim
-```
-
-#### GDB dependencies for older versions of OpenOCD/arm GNU Toolchain (will only work in Ubuntu 22.04):
-You can ignore this part if you are using a new version of OpenOCD and arm GNU toolchain. 
-```
-sudo apt install libncurses5
-sudo apt install libncursesw5
-```
-
-#### Install GNU-Arm Toolchain (first download the needed .tar.xz folder)  
-```
-sudo tar -xf ~/Downloads/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
-```
-
-#### Install OpenOCD (first download the needed linux .tar.gz file)   
-```
-sudo tar -xzf ~/Downloads/xpack-openocd-0.12.0-6-linux-x64.tar.gz -C /opt
-```
-
-#### Install STlink
-```
-sudo apt install stlink-tools
-```
-
-#### Add USB rules
-Copy USB rules from openOCD to udev/rules.d folder:
-```
-sudo cp /opt/xpack-openocd-0.12.0-6/openocd/contrib/60-openocd.rules /etc/udev/rules.d
-```
-Implement the rule changes:
-```
-sudo udevadm control --reload-rules
-```
-
-#### Add the stuff we downloaded to PATH (permanently), IMPORTANT:  
-```
-sudo vim ~/.bashrc
-```
-At the end of the file, add the following lines: 
-```
-export PATH="/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin:$PATH"
-export PATH="/opt/xpack-openocd-0.12.0-6/bin/:$PATH"
-```
-Run the following to reset path var:
-```
-source ~/.bashrc
-```
-Verify that PATH has been updated: 
-```
-echo $PATH
-```
--> should see the following:
-```
-/opt/xpack-openocd-0.12.0-6/bin/:/opt/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/
-```
-somewhere in the PATH variable. 
-
-### Testing OpenOCD and GNU ARM Toolchain:
-Run the following commands:
-```
-arm-none-eabi-gcc --version
-openocd --version
-```
-If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (14.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev-blahblahblah nobody reading all that for openocd)!  
-
-### Allow .gdbinit functions to be run in gdb:  
-```
-vim ~/.gdbinit
-```
-Add the following line to the file, then save and exit:  
-```
-set auto-load safe-path /
-```
-#### VSCode stuff: Just open the git repo in VSCode. I recommend running the client side of OpenOCD in VSCode and the server side of OpenOCD in a seperate terminal.
-
-#### You are now ready to flash code! Just follow the directions in the Nucleo-F446RE-LED Repository to program the club's STM32 reference boards for the first time, available [here](https://github.com/osu-esdc/Nucleo-F446RE-LED). 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## You are now ready to flash code! Just follow the directions in the Nucleo-F446RE-LED Repository to program the club's STM32 reference boards for the first time, available [here](https://github.com/osu-esdc/Nucleo-F446RE-LED). 
