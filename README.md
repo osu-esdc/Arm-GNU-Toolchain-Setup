@@ -48,6 +48,8 @@ After installation, restart your computer, and type in `wsl` into the search bar
 ### `All Hosts` Install tools 
 ```
 sudo apt update && sudo apt upgrade
+```
+```
 sudo apt install gcc make binutils stlink-tools usbutils libncurses-dev 
 ```
 
@@ -68,6 +70,8 @@ export DOWNLOAD_DIR=~/Downloads
 ### `All Hosts` Install Arm-GNU Toolchain and OpenOCD
 ```
 sudo tar -xf "$DOWNLOAD_DIR"/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
+```
+```
 sudo tar -xzf "$DOWNLOAD_DIR"/xpack-openocd-0.12.0-7-linux-x64.tar.gz -C /opt
 ```
 
@@ -102,6 +106,8 @@ source ~/.bashrc
 Add the Virtual USB port driver into a configuration file that runs at WSL boot, then shutdown WSL:
 ```
 echo "vhci_hcd" | sudo tee /etc/modules-load.d/wsl-usb.conf
+```
+```
 sudo shutdown now
 ```
 -> Open WSL again.   
@@ -110,7 +116,7 @@ sudo shutdown now
 you want to use is currently plugged into your machine. You can always come back to this part later
 if you don't have the microcontroller connected yet.  
 
-Open Command Prompt as administrator, then run this: 
+Open a new Command Prompt as administrator, then run this: 
 ```
 usbipd list
 ```
@@ -146,6 +152,8 @@ lsusb
 Run the following commands:
 ```
 arm-none-eabi-gcc --version
+```
+```
 openocd --version
 ```
 -> If the installation has succeeded, then you should see a message after each command stating the name of the tool and the version (15.2.Rel1 for arm-none-eabi-gcc and 0.12.0+dev... for openocd)!  
@@ -171,10 +179,14 @@ echo -e "set auto-load safe-path /" >> ~/.gdbinit
 Set git username and password:
 ```
 git config --global user.name "username"
+```
+```
 git config --global user.email "email"
+```
+```
 git config --list
 ```
--> output of last command should show you your inputted username and email!
+-> output of last command should show you your inputted username and email
 
 &nbsp;
 ### `All Hosts` Optional: Set up SSH keys for GitHub
@@ -198,6 +210,8 @@ create a name for the SSH key and paste the previously copied output into the la
 Run the following to update ssh agent to use this key:
 ```
 eval `ssh-agent -s`
+```
+```
 ssh-add
 ```
 Verify that your ssh stuff works:
