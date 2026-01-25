@@ -39,11 +39,7 @@ need to adjust the names of these files accordingly.
 Open Command Prompt as administrator, then run:
 ```
 wsl --install
-```
-```
 wsl.exe --install Ubuntu-24.04
-```
-```
 wsl --set-default Ubuntu-24.04
 ```
 After installation, restart your computer, and type in `wsl` into the search bar. Open wsl. 
@@ -52,18 +48,17 @@ After installation, restart your computer, and type in `wsl` into the search bar
 ### `All Hosts` Install tools 
 ```
 sudo apt update && sudo apt upgrade
-sudo apt install gcc make binutils stlink-tools libncurses-dev 
+sudo apt install gcc make binutils stlink-tools usbutils libncurses-dev 
 ```
 
 &nbsp;
 ### `All Hosts` Set up environmental variables 
 <ins> NOTE:</ins> Make sure you know what path your toolchain/OpenOCD files were downloaded to. If they
 are different than the examples in this section, replace them with the actual paths. 
-- `Windows Hosts` (make sure to replace <WinUser> with your Windows host username) </ins>:
+- `Windows Hosts` 
 ```
-export DOWNLOAD_DIR=/mnt/c/users/<WinUser>/Downloads
+export DOWNLOAD_DIR="/mnt/c/users/$(cmd.exe /c "echo %USERNAME%" | tr -d '\r')/Downloads"
 ```
--> If WinUser has a space in it `(i.e., Shirley Temple)`, then surround it with single quotation marks `(i.e., 'Shirley Temple')`
 - `Linux Hosts`
 ```
 export DOWNLOAD_DIR=~/Downloads
@@ -72,10 +67,8 @@ export DOWNLOAD_DIR=~/Downloads
 &nbsp;
 ### `All Hosts` Install Arm-GNU Toolchain and OpenOCD
 ```
-sudo tar -xf $DOWNLOAD_DIR/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
-```
-```
-sudo tar -xzf $DOWNLOAD_DIR/xpack-openocd-0.12.0-7-linux-x64.tar.gz -C /opt
+sudo tar -xf "$DOWNLOAD_DIR"/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt
+sudo tar -xzf "$DOWNLOAD_DIR"/xpack-openocd-0.12.0-7-linux-x64.tar.gz -C /opt
 ```
 
 &nbsp;
@@ -103,28 +96,33 @@ source ~/.bashrc
 ### `Windows Hosts` Get USB support in WSL
 - Download the .msi file from [here](https://github.com/dorssel/usbipd-win/releases)  
 - Run the .msi file installer  
-- Before the next step: make sure that the microcontroller you want to use is currently plugged into your machine  
 
 &nbsp;
 ### `Windows Hosts` Set up USB device for WSL
-Add the Virtual USB port driver into a configuration file that runs at WSL boot:
+Add the Virtual USB port driver into a configuration file that runs at WSL boot, then shutdown WSL:
 ```
 echo "vhci_hcd" | sudo tee /etc/modules-load.d/wsl-usb.conf
+sudo shutdown now
 ```
+-> Open WSL again.   
+
+<ins> NOTE:</ins> Before the next step: make sure that the microcontroller 
+you want to use is currently plugged into your machine. You can always come back to this part later
+if you don't have the microcontroller connected yet.  
+
 Open Command Prompt as administrator, then run this: 
 ```
 usbipd list
 ```
--> This command outputs the BUSIDs and names for any USB device connected to your computer. Find the BUSID associated with the ST-Link Debug device, then use it in the next command: 
+-> This command outputs the BUSIDs and names for any USB device connected to your computer. 
+
+Find the BUSID associated with the ST-Link Debug device, which should look something like:     
+`7-4    0483:374b  ST-Link Debug, USB Mass Storage Device, STMicroelectronic...  Not shared`.   
+Then use its BUSID (i.e., `7-4`) in the next command:   
 ```
 usbipd bind --busid <BUSID>
 usbipd attach --wsl --busid <BUSID>
 ```
-Restart WSL: 
-```
-wsl --shutdown
-```
--> Open WSL again. 
 
 &nbsp;
 ### `Windows Hosts` Quick commands to re-attach USB device to WSL after every disconnect
@@ -140,7 +138,8 @@ In WSL terminal, run the following command to check if the USB device has been a
 ```
 lsusb
 ```
--> Should see the name of the attached USB device in the output.
+-> Should see the name of the attached USB device in the output, looking something like:   
+`Bus 001 Device 002: ID 0483:374b STMicroelectronics ST-LINK/V2.1`
 
 &nbsp;
 ### `All Hosts` Testing OpenOCD and GNU ARM Toolchain
@@ -164,11 +163,7 @@ Follow the instructions [here](https://code.visualstudio.com/docs/remote/wsl)
 &nbsp;
 ### `All Hosts` Optional: Allow .gdbinit functions to be run in gdb
 ```
-vim ~/.gdbinit
-```
-Add the following line to the file, then save and exit:  
-```
-set auto-load safe-path /
+echo -e "set auto-load safe-path /" >> ~/.gdbinit
 ```
 
 &nbsp;
@@ -209,10 +204,12 @@ Verify that your ssh stuff works:
 ```
 ssh -T git@github.com
 ```
--> should see `Hi git_username! You've successfully authenticated, but GitHub does not provide shell access.`!
+-> should see `Hi git_username! You've successfully authenticated, but GitHub does not provide shell access.`
 
 &nbsp;
 ### `Windows Hosts` Tips: Quick commands to re-attach USB device to WSL after every disconnect
+<ins> NOTE:</ins> The USB device must be connected to the computer for these steps to work. 
+
 In Command Prompt:
 ```
 usbipd list
@@ -225,6 +222,11 @@ In WSL terminal, run the following command to check if the USB device has been a
 ```
 lsusb
 ```
--> Should see the name of the attached USB device in the output.
+-> Should see the name of the attached USB device in the output, looking something like:   
+`Bus 001 Device 002: ID 0483:374b STMicroelectronics ST-LINK/V2.1`
 
+&nbsp;
 ## You are now ready to flash code! Just follow the directions in the Nucleo-F446RE-LED Repository to program the club's STM32 reference boards for the first time, available [here](https://github.com/osu-esdc/Nucleo-F446RE-LED). 
+
+&nbsp;
+## For more information on bare-metal programming, see [this](https://github.com/cpq/bare-metal-programming-guide) fantastic guide.
