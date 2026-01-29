@@ -167,7 +167,7 @@ Requirements:
 
 Follow the instructions [here](https://code.visualstudio.com/docs/remote/wsl)  
 - <ins> Note:</ins> Close and re-open your WSL window after installing VsCode/the WSL extension for VsCode, otherwise WSL will not recognize `code .` as a
-command usable with the Windows VsCode program; it will prompt you to install VsCode in Linux, which we do not want. 
+command usable with the Windows VsCode program. If you do not, it will prompt you to install VsCode in Linux, which we do not want. 
   
 &nbsp;
 ### `All Hosts` Optional: Allow .gdbinit functions to be run in gdb
