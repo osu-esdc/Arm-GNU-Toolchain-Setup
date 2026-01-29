@@ -108,9 +108,8 @@ Add the Virtual USB port driver into a configuration file that runs at WSL boot,
 echo "vhci_hcd" | sudo tee /etc/modules-load.d/wsl-usb.conf
 ```
 ```
-sudo shutdown now
+sudo modprobe vhci_hcd
 ```
--> Open WSL again.   
 
 <ins> NOTE:</ins> Before the next step: make sure that the microcontroller 
 you want to use is currently plugged into your machine. You can always come back to this part later
