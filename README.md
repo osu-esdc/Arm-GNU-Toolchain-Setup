@@ -47,10 +47,10 @@ After installation, restart your computer, and type in `wsl` into the search bar
 &nbsp;
 ### `All Hosts` Install tools 
 ```
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 ```
 ```
-sudo apt install gcc make binutils stlink-tools usbutils libncurses-dev 
+sudo apt install -y gcc make binutils stlink-tools usbutils libncurses-dev 
 ```
 
 &nbsp;
